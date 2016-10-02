@@ -22,10 +22,11 @@ angular.module('minhasDiretivas', [])
         ddo.restrict = "AE";
 
         ddo.scope = {
-            titulo: '@'
+            titulo: '@',
+            url: '@'
         };
 
-        ddo.template = '<img class="img-responsive center-block" alt="{{titulo}}">';           
+        ddo.template = '<img class="img-responsive center-block" src="{{url}}" alt="{{titulo}}">';           
         
         return ddo;
     })

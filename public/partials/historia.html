@@ -23,7 +23,7 @@
 
 <div class="row">
     <meu-painel class="col-md-2 painel-animado" ng-repeat="historia in historias | filter: filtro" titulo="{{historia.titulo}}">
-        <minha-historia alt="{{historia.titulo}}"></minha-historia>
+        <minha-historia url="{{historia.url}}" alt="{{historia.titulo}}"></minha-historia>
 
 		<a class="btn btn-primary btn-block" href="/#/historias/edit/{{historia._id}}">
 			Editar

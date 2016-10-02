@@ -6,6 +6,14 @@ var schema = mongoose.Schema(
 		type: String,
 		require: true
 	},
+	url : {
+		type: String,
+		require: true
+	},
+	descricao : {
+		type: String,
+		require: true
+	},
 	genero : {
 		type: String,
 		require: true
