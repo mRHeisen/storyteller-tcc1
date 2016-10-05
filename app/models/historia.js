@@ -18,16 +18,13 @@ var schema = mongoose.Schema(
 		type: String,
 		require: true
 	},
-	pontuacao : {
-		type : Number,
-		require: false
-	},
-	capitulos: [
+	capitulos:
 	{
 		numero: Number,
 		texto: String,
+		anterior: Number,
+		proximo: Number
 	}
-	]
 });
 
 mongoose.model('Historia', schema);

@@ -21,4 +21,37 @@ api.lista = function(req, res){
 		});
 
 };
+api.adiciona = function(req, res){
+	//genero recebida pelo req.body
+	var genero = req.body
+	console.log(genero);
+	//Usa funçao do mongoose (create) para criar genero, espera uma genero recebida pelo req.body
+	model
+		.create(genero)
+		.then(function(genero) {
+			//Manda a genero criado com o com id do MongoDB
+			res.json(genero)
+		}, function(error){
+			//Mostra o erro no console
+			console.log(error);
+			//Manda o status 500 na requisição e o erro em json
+			res.status(500).json(error);
+		});
+
+};
+api.removePorId = function(req, res){
+	//Usa funçao do mongoose (remove) para remover, espera o criterio de remoção 	
+	model
+		.remove({_id: req.params.id})
+		.then(function() {
+			//Manda o status 204 na requisição que ocorreu tudo ok
+			res.sendStatus(204);
+		}, function(error){
+			//Mostra o erro no console
+			console.log(error);
+			//Manda o status 500 na requisição e o erro em json
+			res.status(500).json(error);
+		});
+
+};
 module.exports = api;
