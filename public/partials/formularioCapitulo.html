@@ -1,0 +1,32 @@
+<div class="page-header text-center">
+	<h1>{{historia.titulo}}</h1>
+	<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+</div>
+<button class="btn btn-primary" ng-click="newCap()">Novo Capitulo</button>
+<button class="btn btn-primary" ng-click="removeCap()">Exclui Capitulo</button>
+
+<form novalidate name="formulario" class="row" ng-submit="submeter()">
+	<div class="col-md-6">
+		<div ng-repeat="capitulo in historia.capitulos">
+		<p>
+		<label>Numero Capitulo {{capitulo.numero}}</label>
+    	<input type="number" name="numCapitulo" class="form-control" ng-model="capitulo.numero" required>
+    	<label>Texto</label>
+		<textarea ng-maxlength="2000" name="textCapitulo" class="form-control" ng-model="capitulo.texto" required></textarea>
+		<span ng-show="formulario.textCapitulo.$error.maxlength" 
+				class="form-control alert-danger">
+				No máximo 2000 caracteres!
+		</span>
+		<label>Capitulo anterior</label>
+		<input type="number" name="aftCapitulo" class="form-control" ng-model="capitulo.anterior" required>
+		<label>Capitulo seguinte</label>
+		<input type="number" name="nxtCapitulo" class="form-control" ng-model="capitulo.proximo" required>
+		</p>
+		</div>
+		<button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">
+			Salvar
+		</button>
+		<a href="/#/historias" class="btn btn-primary">Voltar</a>
+		<hr>
+	</div>
+</form>

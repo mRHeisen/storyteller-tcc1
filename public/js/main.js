@@ -17,6 +17,11 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 			controller: 'HistoriaController'
 		});
 
+		$routeProvider.when('/capitulos/edit/:historiaId', {
+			templateUrl: 'partials/formularioCapitulo.html',
+			controller: 'CapitulosController'
+		});
+
 		$routeProvider.otherwise({redirectTo: '/historia'});
 
 	});

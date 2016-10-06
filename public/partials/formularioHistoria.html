@@ -8,13 +8,13 @@
 	<div class="col-md-6">
 		<div class="form-group">
 			<label>Título</label>
-			<input name="titulo" class="form-control" ng-model="historia.titulo" required>  
+			<input ng-maxlength="20" name="titulo" class="form-control" ng-model="historia.titulo" required>  
 
 			<span ng-show = "formulario.$submitted && formulario.titulo.$error.required"
 				class="form-control alert-danger">
 				Título obrigatório
 			</span>
-			<span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength" 
+			<span ng-show="formulario.titulo.$error.maxlength" 
 				class="form-control alert-danger">
 				No máximo 20 caracteres!
 			</span>
@@ -47,38 +47,6 @@
 			<span ng-show="formulario.$submitted && formulario.genero.$error.required" 
 				class="form-control alert-danger">
 				Genero obrigatório
-			</span>
-		</div>
-		<div class="form-group">
-			<label>Numero Capitulo</label>
-			<input name="numCapitulo" class="form-control" ng-model="historia.capitulos.numero">
-			<span ng-show="formulario.$submitted && formulario.numCapitulo.$valid" 
-				class="form-control alert-danger">
-				Digite um numero
-			</span>
-		</div>
-
-		<div class="form-group">
-			<label>Texto Capitulo</label>
-			<textarea name="textoCapitulo" class="form-control" ng-model="historia.capitulos.texto">
-			</textarea>
-		</div>
-
-		<div class="form-group">
-			<label>Numero Capitulo anterior</label>
-			<input name="numAFCapitulo" class="form-control" ng-model="historia.capitulos.anterior">
-			<span ng-show="formulario.$submitted && formulario.numAFCapitulo.$valid" 
-				class="form-control alert-danger">
-				Digite um numero
-			</span>
-		</div>
-
-		<div class="form-group">
-			<label>Numero Proximo Capitulo</label>
-			<input name="numNXCapitulo" class="form-control" ng-model="historia.capitulos.proximo">
-			<span ng-show="formulario.$submitted && formulario.numNXCapitulo.$valid" 
-				class="form-control alert-danger">
-				Digite um numero
 			</span>
 		</div>
 

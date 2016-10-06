@@ -18,13 +18,14 @@ var schema = mongoose.Schema(
 		type: String,
 		require: true
 	},
-	capitulos:
-	{
-		numero: Number,
-		texto: String,
-		anterior: Number,
-		proximo: Number
-	}
+	capitulos : [
+    {
+        numero : Number,
+        texto : String,
+        anterior : Number,
+        proximo : Number
+    }
+    ]
 });
 
 mongoose.model('Historia', schema);
