@@ -4,11 +4,9 @@
 </div>
 <button class="btn btn-primary" ng-click="newCap()">Novo Capitulo</button>
 <button class="btn btn-primary" ng-click="removeCap()">Exclui Capitulo</button>
-
 <form novalidate name="formulario" class="row" ng-submit="submeter()">
-	<div class="col-md-6">
-		<div ng-repeat="capitulo in historia.capitulos">
-		<p>
+<div class="panel panel-default col-xs-6 col-sm-3" ng-repeat="capitulo in historia.capitulos" style="background-color:lavender;">
+	<div class="panel-heading">
 		<label>Numero Capitulo {{capitulo.numero}}</label>
     	<input type="number" name="numCapitulo" class="form-control" ng-model="capitulo.numero" required>
     	<label>Texto</label>
@@ -21,8 +19,12 @@
 		<input type="number" name="aftCapitulo" class="form-control" ng-model="capitulo.anterior" required>
 		<label>Capitulo seguinte</label>
 		<input type="number" name="nxtCapitulo" class="form-control" ng-model="capitulo.proximo" required>
-		</p>
-		</div>
+	</div>
+	<div class="panel-body" ng-transclude>
+	</div>
+</div>
+<form novalidate name="formulario" class="row" ng-submit="submeter()">
+	<div class="col-md-6">
 		<button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">
 			Salvar
 		</button>
