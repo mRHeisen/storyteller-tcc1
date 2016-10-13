@@ -27,7 +27,7 @@ angular.module('storyteller')
 		};
 		// Adiciona capitulo em branco
    		$scope.newCap = function() {
-   		var capitulo = {};
+   		var capitulo = { numero: 0, texto : null, anterior : 0, proximo: [0,0,0]};
    		$scope.historia.capitulos.push(capitulo);
    		};
    		//Remove ultimo capitulo

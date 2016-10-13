@@ -12,4 +12,20 @@
   -ms-transform: scale(0.1);
   -o-transform: scale(0.1);
   transform: scale(0.1);
+}
+h1 {
+  text-transform: uppercase;
+}
+.rodape-pagina {
+    background-color: #e6e6e6;
+    color: black;
+    padding: 20px;
+    clear: both;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-position: 99% center;
+    background-repeat: no-repeat;
 } 
