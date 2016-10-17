@@ -15,9 +15,7 @@
 				class="form-control alert-danger">
 				No máximo 2000 caracteres!
 		</span>
-		<label>Capitulo anterior</label>
-		<input type="number" name="aftCapitulo" class="form-control" ng-model="capitulo.anterior" required>
-		<label >Capitulo seguinte</label>
+		<label >Capitulos seguintes</label>
 		<div ng-repeat="(i, proximo) in capitulo.proximo track by $index">
             <input type="number" name="nxtCapitulo" class="form-control" ng-model="capitulo.proximo[i]" required>
 		</div>

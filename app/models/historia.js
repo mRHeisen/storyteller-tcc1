@@ -22,7 +22,6 @@ var schema = mongoose.Schema(
     {
         numero : Number,
         texto : String,
-		anterior : Number,
         proximo : [
         	Number
         ]

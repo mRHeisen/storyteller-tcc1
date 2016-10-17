@@ -3,16 +3,16 @@ angular.module('storyteller')
 		
 		$scope.historia = {};
 		$scope.mensagem = '';
-
+		
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
-				$scope.historia = historia;;
+				$scope.historia = historia;
+				return numero = historia.capitulos.length;
 			}, function(erro) {
 				console.log(erro);
 				$scope.mensagem = 'Não foi possível obter historia'
 			});
 		}
-
 		$scope.submeter = function() {
 
 			if ($scope.formulario.$valid) {
@@ -27,12 +27,14 @@ angular.module('storyteller')
 		};
 		// Adiciona capitulo em branco
    		$scope.newCap = function() {
-   		var capitulo = { numero: 0, texto : null, anterior : 0, proximo: [0,0,0]};
+   		numero++;
+   		var capitulo = { numero: numero, texto : null, anterior : 0, proximo: [0,0,0]};
    		$scope.historia.capitulos.push(capitulo);
    		};
    		//Remove ultimo capitulo
    		$scope.removeCap = function() {
    		$scope.historia.capitulos.splice(-1,1);
+   		--numero;
    		};
 
 
