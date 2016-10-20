@@ -28,4 +28,13 @@ h1 {
     box-sizing: border-box;
     background-position: 99% center;
     background-repeat: no-repeat;
-} 
+}
+textarea {
+    resize: none;
+}
+.text-center {
+    text-align:center;
+}
+.painel-cap {
+    
+}

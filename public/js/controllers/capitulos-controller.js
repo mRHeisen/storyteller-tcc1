@@ -26,15 +26,24 @@ angular.module('storyteller')
 			}
 		};
 		// Adiciona capitulo em branco
-   		$scope.newCap = function() {
+   		$scope.newCap = function(proximo) {
    		numero++;
-   		var capitulo = { numero: numero, texto : null, anterior : 0, proximo: [0,0,0]};
+   		proximo++;
+   		var capitulo = { numero: numero, texto : null, anterior : 0, proximo: [proximo]};
    		$scope.historia.capitulos.push(capitulo);
    		};
    		//Remove ultimo capitulo
    		$scope.removeCap = function() {
    		$scope.historia.capitulos.splice(-1,1);
    		--numero;
+   		};
+   		// Adiciona link em branco
+   		$scope.newLink = function(capitulo) {
+   		capitulo.proximo.push(0);
+   		};
+   		//Remove ultimo link
+   		$scope.delLink = function(capitulo) {
+   		capitulo.proximo.splice(-1,1);
    		};
 
 

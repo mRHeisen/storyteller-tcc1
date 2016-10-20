@@ -2,32 +2,31 @@
 	<h1 >{{historia.titulo}}</h1>
 	<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
 </div>
-<button class="btn btn-primary" ng-click="newCap()">Novo Capitulo</button>
-<button class="btn btn-primary" ng-click="removeCap()">Exclui Capitulo</button>
-<form novalidate name="formulario" class="row" ng-submit="submeter()">
-<div class="panel painel-animado col-xs-6 col-sm-3" ng-repeat="capitulo in historia.capitulos" style="background-color:#e6e6e6;">
-	<div class="panel-heading">
-		<label>Numero Capitulo {{capitulo.numero}}</label>
-    	<input type="number" name="numCapitulo" class="form-control" ng-model="capitulo.numero" required>
-    	<label>Texto</label>
-		<textarea ng-maxlength="2000" spellcheck="true" rows="10" name="textCapitulo" class="form-control" ng-model="capitulo.texto" required></textarea>
-		<span ng-show="formulario.textCapitulo.$error.maxlength" 
-				class="form-control alert-danger">
-				No máximo 2000 caracteres!
-		</span>
-		<label >Capitulos seguintes</label>
-		<div ng-repeat="(i, proximo) in capitulo.proximo track by $index">
-            <input type="number" name="nxtCapitulo" class="form-control" ng-model="capitulo.proximo[i]" required>
-		</div>
-	</div>
-</div>
 
-<form novalidate name="formulario" class="row" ng-submit="submeter()">
-	<div class="col-md-6">
-		<button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">
+<form novalidate name="formulario" class="row">
+	<div>
+		<button class="btn btn-primary" ng-click="newCap()">Novo Capitulo</button>
+		<button class="btn btn-primary" ng-click="removeCap()">Exclui Capitulo</button>
+		<button type="submit" class="btn btn-primary" ng-click="submeter()" ng-disabled="formulario.$invalid">
 			Salvar
 		</button>
 		<a href="/#/historias" class="btn btn-primary">Voltar</a>
 		<hr>
 	</div>
+<div class="panel painel-cap painel-animado col-xs-6 col-sm-3" ng-repeat="capitulo in historia.capitulos" style="background-color:#e6e6e6;">
+	<div class="panel-heading">
+		<label>Numero Capitulo {{capitulo.numero}}</label>
+		<input type="number" name="numero" class="form-control" ng-model="capitulo.numero" required>
+    	<div>
+    	<label>Texto</label>
+			<textarea ng-maxlength="2000" spellcheck="true" rows="10" name="textCapitulo" class="form-control" ng-model="capitulo.texto" required></textarea>
+		<label >Capitulos ligados</label>
+			<button class="btn btn-primary col-sm-6" ng-click="newLink(capitulo)">adiciona</button>
+			<button class="btn btn-primary col-sm-6" ng-click="delLink(capitulo)">remove</button>
+			<div ng-repeat="(i, proximo) in capitulo.proximo track by $index">
+            	<input type="number" name="nxtCapitulo" class="form-control" ng-model="capitulo.proximo[i]" required>
+			</div>
+		</div>
+	</div>
+</div>
 </form>
