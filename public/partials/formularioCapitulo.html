@@ -6,26 +6,32 @@
 <form novalidate name="formulario" class="row">
 	<div>
 		<button class="btn btn-primary" ng-click="newCap()">Novo Capitulo</button>
-		<button class="btn btn-primary" ng-click="removeCap()">Exclui Capitulo</button>
 		<button type="submit" class="btn btn-primary" ng-click="submeter()" ng-disabled="formulario.$invalid">
 			Salvar
 		</button>
 		<a href="/#/historias" class="btn btn-primary">Voltar</a>
 		<hr>
 	</div>
-<div class="panel painel-cap painel-animado col-xs-6 col-sm-3" ng-repeat="capitulo in historia.capitulos" style="background-color:#e6e6e6;">
+<div class="panel painel-cap painel-animado col-xs-12 col-sm-3" ng-repeat="capitulo in historia.capitulos" style="background-color:#e6e6e6;">
 	<div class="panel-heading">
-		<label>Numero Capitulo {{capitulo.numero}}</label>
-		<input type="number" name="numero" class="form-control" ng-model="capitulo.numero" required>
+		<label class="col-sm-6" > Capitulo:  {{capitulo.numero}}  </label>
+		<button type="button" class="btn btn-default btn-lg col-sm-3" ng-click="removeCap(capitulo)">
+  				<span class="glyphicon glyphicon-trash"></span>
+		</button>
     	<div>
-    	<label>Texto</label>
+    	<label class="col-sm-12">Texto:</label>
 			<textarea ng-maxlength="2000" spellcheck="true" rows="10" name="textCapitulo" class="form-control" ng-model="capitulo.texto" required></textarea>
-		<label >Capitulos ligados</label>
+			<label class="col-sm-12">Ações:</label>
+			<button type="button" class="btn btn-default btn-lg col-sm-12" ng-click="removeCap(capitulo)">
+  				<span class="glyphicon glyphicon-list-alt"></span>
+			</button>
+			<!-- 
 			<button class="btn btn-primary col-sm-6" ng-click="newLink(capitulo)">adiciona</button>
-			<button class="btn btn-primary col-sm-6" ng-click="delLink(capitulo)">remove</button>
+			<button class="btn btn-primary col-sm-6" ng-click="delLink(capitulo)">remover</button>
 			<div ng-repeat="(i, proximo) in capitulo.proximo track by $index">
             	<input type="number" name="nxtCapitulo" class="form-control" ng-model="capitulo.proximo[i]" required>
 			</div>
+			-->
 		</div>
 	</div>
 </div>

@@ -32,10 +32,14 @@ angular.module('storyteller')
    		var capitulo = { numero: numero, texto : null, anterior : 0, proximo: [proximo]};
    		$scope.historia.capitulos.push(capitulo);
    		};
-   		//Remove ultimo capitulo
-   		$scope.removeCap = function() {
-   		$scope.historia.capitulos.splice(-1,1);
+   		//Remove capitulo
+   		$scope.removeCap = function(capitulo) {
+   		console.log(capitulo);
+   		var indiceDoCap = $scope.historia.capitulos.indexOf(capitulo);
+   		if (indiceDoCap > -1) {
+    	$scope.historia.capitulos.splice(indiceDoCap, 1);
    		--numero;
+   			};
    		};
    		// Adiciona link em branco
    		$scope.newLink = function(capitulo) {
