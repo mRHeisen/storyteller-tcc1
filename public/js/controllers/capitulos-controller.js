@@ -1,14 +1,7 @@
 angular.module('storyteller')
-	.controller('CapitulosController', function($scope, recursoHistorias, $routeParams, cadastroDeHistorias) {
-		
+	.controller('CapitulosController', function($scope, recursoHistorias, $routeParams, $uibModal, cadastroDeHistorias) {
 		$scope.historia = {};
 		$scope.mensagem = '';
-
-   		$(document).ready(function(){
-    	$("#myBtn").click(function(){
-        $("#myModal").modal();
-    	});
-		});
 		
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
@@ -38,21 +31,24 @@ angular.module('storyteller')
    		};
    		//Remove capitulo
    		$scope.removeCap = function(capitulo) {
-   		console.log(capitulo);
    		var indiceDoCap = $scope.historia.capitulos.indexOf(capitulo);
    		if (indiceDoCap > -1) {
     	$scope.historia.capitulos.splice(indiceDoCap, 1);
-   		//--numero;
    			};
    		};
-   		// Adiciona link em branco
-   		$scope.newLink = function(capitulo) {
-   		ac = {num: 0, text: ""};
-   		capitulo.acao.push(ac);
-   		};
-   		//Remove ultimo link
-   		$scope.delLink = function(capitulo) {
-   		capitulo.acao.splice(-1,1);
-   		};
+   		// Abre modal com açoes
+   		$scope.open = function (cap) {
+        var modalInstance = $uibModal.open({
+        controller: "ModalController",
+        templateUrl: 'myModal.html',
+        resolve: {
+          capitulo: function()
+           {
+              return cap;
+           }
+         }
+             });
+
+    };
 
 	});

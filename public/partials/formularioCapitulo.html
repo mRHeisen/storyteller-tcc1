@@ -26,24 +26,19 @@
     	<label class="col-sm-12 col-xs-12">Texto:</label>
 			<textarea ng-maxlength="2000" spellcheck="true" rows="10" name="textCapitulo" class="form-control" ng-model="capitulo.texto" required></textarea>
 			<label class="col-sm-12">Ações:</label>
-			<button type="button" class="btn btn-default btn-lg col-sm-12" id="myBtn">
+			<button type="button" class="btn btn-default btn-lg col-sm-12" ng-click="open(capitulo)">
   				<span class="glyphicon glyphicon-list-alt"></span>
 			</button>
-				<div class="container">
-				  <!-- Modal -->
-				  <div class="modal fade" id="myModal" role="dialog">
-				    <div class="modal-dialog">
-				    
-				      <!-- Modal content-->
-				      <div class="modal-content">
+			<script type="text/ng-template" id="myModal.html">
+    			<div class="modal-content">
 				        <div class="modal-header">
-				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
 				          <h4 class="modal-title">Ações do capitulo {{capitulo.numero}}</h4>
 				        </div>
 				        <div class="modal-body">
-				          	<button class="btn btn-primary col-sm-6" ng-click="newLink(capitulo)">adiciona</button>
-							<button class="btn btn-primary col-sm-6" ng-click="delLink(capitulo)">remover</button>
+
 							<div ng-repeat="acao in capitulo.acao">
+								<button type="button" class="close" ng-click="delLink(acao)"><span class="glyphicon glyphicon-trash"></span></button>
 								<label class="col-sm-12">Numero Capitulo</label>
 				            	<input type="number" name="numCapitulo" class="form-control" ng-model="acao.numCapitulo" required>
 				            	<label class="col-sm-12">Ação</label>
@@ -51,18 +46,12 @@
 							</div>
 				        </div>
 				        <div class="modal-footer">
-				          <button type="button" class="btn btn-default" data-dismiss="modal">Salvar</button>
+					        <button class="btn btn-default col-sm-3" ng-click="newLink(capitulo)">Nova Ação</button>
+					        <button class="btn btn-default">Salvar</button>
 				        </div>
 				      </div>
-				      
-				    </div>
-				  </div>
-				  
-				</div>
-
+  			</script>
 		</div>
 	</div>
 </div>
-
-
 </form>

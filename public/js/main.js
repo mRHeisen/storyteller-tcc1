@@ -1,4 +1,4 @@
-angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos'])
+angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos', 'ui.bootstrap'])
 	.config(function($routeProvider, $locationProvider, $httpProvider) {
 
 
