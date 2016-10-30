@@ -3,11 +3,16 @@ angular.module('storyteller')
 		
 		$scope.historia = {};
 		$scope.mensagem = '';
+
+   		$(document).ready(function(){
+    	$("#myBtn").click(function(){
+        $("#myModal").modal();
+    	});
+		});
 		
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
 				$scope.historia = historia;
-				return numero = historia.capitulos.length;
 			}, function(erro) {
 				console.log(erro);
 				$scope.mensagem = 'Não foi possível obter historia'
@@ -26,10 +31,9 @@ angular.module('storyteller')
 			}
 		};
 		// Adiciona capitulo em branco
-   		$scope.newCap = function(proximo) {
-   		numero++;
-   		proximo++;
-   		var capitulo = { numero: numero, texto : null, anterior : 0, proximo: [proximo]};
+   		$scope.newCap = function() {
+   		ac = {num: null, text: null};
+   		var capitulo = { numero: null, texto : null, acao : [ac]};
    		$scope.historia.capitulos.push(capitulo);
    		};
    		//Remove capitulo
@@ -38,17 +42,17 @@ angular.module('storyteller')
    		var indiceDoCap = $scope.historia.capitulos.indexOf(capitulo);
    		if (indiceDoCap > -1) {
     	$scope.historia.capitulos.splice(indiceDoCap, 1);
-   		--numero;
+   		//--numero;
    			};
    		};
    		// Adiciona link em branco
    		$scope.newLink = function(capitulo) {
-   		capitulo.proximo.push(0);
+   		ac = {num: 0, text: ""};
+   		capitulo.acao.push(ac);
    		};
    		//Remove ultimo link
    		$scope.delLink = function(capitulo) {
-   		capitulo.proximo.splice(-1,1);
+   		capitulo.acao.splice(-1,1);
    		};
-
 
 	});
