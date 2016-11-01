@@ -17,7 +17,6 @@ angular.module('storyteller')
 
 
 		$scope.capitulo = function(num) {
-			console.log(num);
 		recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
 				$scope.historia.capitulos = historia.capitulos[num];
 

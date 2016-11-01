@@ -26,7 +26,7 @@ angular.module('storyteller')
 		// Adiciona capitulo em branco
    		$scope.newCap = function() {
    		var indiceDoCap = $scope.historia.capitulos.length
-   		var capitulo = {texto : null};
+   		var capitulo = {texto : null, acao : []};
    		$scope.historia.capitulos.push(capitulo);
    		};
    		//Remove capitulo
