@@ -1,0 +1,20 @@
+<div class="page-header text-center text-transform: uppercase">
+	<h1 >{{historia.titulo}}</h1>
+</div>
+	<div>
+		<a href="/#/lista/historia/{{historia._id}}" class="btn btn-primary">Voltar</a>
+		<hr>
+	</div>
+<div class="panel painel-cap col-xs-12 col-sm-3" style="background-color:#e6e6e6;">
+	<div class="panel-heading">
+		<label class="col-sm-12 col-xs-3"></label>
+			Capitulo: 	{{historia.capitulos.numero}}
+    	<label class="col-sm-12 col-xs-12">Texto:</label>
+    		<p>
+    			{{historia.capitulos.texto}}
+    		</p>
+				<div ng-repeat="acao in historia.capitulos.acao">
+				    <button ng-click="capitulo(acao.numCapitulo)">{{acao.text}}</button>
+			    </div>
+	 </div>
+</div>

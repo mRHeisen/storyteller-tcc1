@@ -20,7 +20,6 @@ var schema = mongoose.Schema(
 	},
 	capitulos : [
     {
-        numero : Number,
         texto : String,
         acao : [
         {

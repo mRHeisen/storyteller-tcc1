@@ -8,28 +8,52 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
    		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
-        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+      	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
 
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="css/efeitos.css">
+
         <script src="js/lib/angular-route.min.js"></script>
         <script src="js/lib/angular-resource.min.js"></script>
+
 		<script src="js/main.js"></script>
 		<script src="js/controllers/historias-controller.js"></script>
 		<script src="js/controllers/historia-controller.js"></script>
 		<script src="js/controllers/generos-controller.js"></script>
 		<script src="js/controllers/capitulos-controller.js"></script>
 		<script src="js/controllers/modal-controller.js"></script>
+		<script src="js/controllers/historia-jogar-controller.js"></script>
 		<script src="js/directives/minhas-diretivas.js"></script>
         <script src="js/services/meus-servicos.js"></script>
 	</head>
 	<body>
 		<div class="container">
+		<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span> 
+		      </button>
+		      <a class="navbar-brand" href="#">Story-Teller</a>
+		    </div>
+		    <div class="collapse navbar-collapse" id="myNavbar">
+		      <ul class="nav navbar-nav">
+		        <li><a href="/#/lista">Lista de Historias</a></li>
+		        <li><a href="/#/historia">Minhas Historias</a></li>
+		      </ul>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
 			<ng-view></ng-view>
-
 		</div> <!-- fim container -->        
 	</body>
 </html>

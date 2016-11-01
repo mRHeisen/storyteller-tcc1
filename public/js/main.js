@@ -3,7 +3,7 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 
 
 		$routeProvider.when('/historia', {
-			templateUrl: 'partials/historia.html',
+			templateUrl: 'partials/minhasHistorias.html',
 			controller: 'HistoriasController'
 		});
 
@@ -22,6 +22,20 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 			controller: 'CapitulosController'
 		});
 
-		$routeProvider.otherwise({redirectTo: '/historia'});
+		$routeProvider.when('/lista', {
+			templateUrl: 'partials/listaHistorias.html',
+			controller: 'HistoriasController'
+		});
+		$routeProvider.when('/lista/historia/:historiaId', {
+			templateUrl: 'partials/historia.html',
+			controller: 'HistoriaController'
+		});
+
+		$routeProvider.when('/lista/historia/jogar/:historiaId', {
+			templateUrl: 'partials/jogarHistoria.html',
+			controller: 'HistoriaJogarController'
+		});
+
 
 	});
+

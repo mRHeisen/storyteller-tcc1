@@ -1,5 +1,5 @@
 angular.module('storyteller')
-	.controller('CapitulosController', function($scope, recursoHistorias, $routeParams, $uibModal, cadastroDeHistorias) {
+	.controller('CapitulosController', function($scope, recursoHistorias, $routeParams, $rootScope, $uibModal, cadastroDeHistorias) {
 		$scope.historia = {};
 		$scope.mensagem = '';
 		
@@ -25,8 +25,8 @@ angular.module('storyteller')
 		};
 		// Adiciona capitulo em branco
    		$scope.newCap = function() {
-   		ac = {num: null, text: null};
-   		var capitulo = { numero: null, texto : null, acao : [ac]};
+   		var indiceDoCap = $scope.historia.capitulos.length
+   		var capitulo = {texto : null};
    		$scope.historia.capitulos.push(capitulo);
    		};
    		//Remove capitulo
@@ -34,21 +34,21 @@ angular.module('storyteller')
    		var indiceDoCap = $scope.historia.capitulos.indexOf(capitulo);
    		if (indiceDoCap > -1) {
     	$scope.historia.capitulos.splice(indiceDoCap, 1);
-   			};
+   		};
    		};
    		// Abre modal com açoes
    		$scope.open = function (cap) {
-        var modalInstance = $uibModal.open({
-        controller: "ModalController",
-        templateUrl: 'myModal.html',
-        resolve: {
-          capitulo: function()
-           {
-              return cap;
-           }
-         }
-             });
+        	$rootScope.modalInstance = $uibModal.open({
+       	 	controller: "ModalController",
+        	templateUrl: 'myModal.html',
+        	resolve: {
+          		capitulo: function()
+           			{
+              		return cap;
+           			}
+         		}
+        	});
 
-    };
-
+    	};
+		
 	});

@@ -9,15 +9,14 @@
 		<button type="submit" class="btn btn-primary" ng-click="submeter()" ng-disabled="formulario.$invalid">
 			Salvar
 		</button>
-		<a href="/#/historias" class="btn btn-primary">Voltar</a>
+		<a href="/#/historia" class="btn btn-primary">Voltar</a>
 		<hr>
 	</div>
 <div class="panel painel-cap painel-animado col-xs-12 col-sm-3" ng-repeat="capitulo in historia.capitulos" style="background-color:#e6e6e6;">
 	<div class="panel-heading">
-		<label class="col-sm-12 col-xs-3">
-			Capitulo: 	
+		<label class="col-sm-6 col-xs-3">
+			Capitulo: {{$index}}
 		</label>
-		<input class="col-sm-6 col-xs-6" type="number" name="numero" class="form-control" ng-model="capitulo.numero" required>
 		<button type="button" class="btn btn-default btn-lg col-sm-3 btn-right" ng-click="removeCap(capitulo)">
   				<span class="glyphicon glyphicon-trash"></span>
 		</button>
@@ -30,6 +29,7 @@
   				<span class="glyphicon glyphicon-list-alt"></span>
 			</button>
 			<script type="text/ng-template" id="myModal.html">
+    		<form novalidate name="formulario" class="row">	
     			<div class="modal-content">
 				        <div class="modal-header">
 
@@ -47,9 +47,10 @@
 				        </div>
 				        <div class="modal-footer">
 					        <button class="btn btn-default col-sm-3" ng-click="newLink(capitulo)">Nova Ação</button>
-					        <button class="btn btn-default">Salvar</button>
+					        <button class="btn btn-default" ng-click="close()" ng-disabled="formulario.$invalid">Salvar</button >
 				        </div>
 				      </div>
+			</form>
   			</script>
 		</div>
 	</div>

@@ -1,7 +1,9 @@
 angular.module('storyteller')
-	.controller('ModalController', function($scope, capitulo) {
+	.controller('ModalController', function($scope, $rootScope, capitulo) {
 	
 	$scope.capitulo = capitulo;
+
+
 	   	$scope.newLink = function(capitulo) {
    		ac = {num: 0, text: ""};
    		capitulo.acao.push(ac);
@@ -10,9 +12,12 @@ angular.module('storyteller')
    		$scope.delLink = function(acao) {
    		var indiceAcao = $scope.capitulo.acao.indexOf(acao);
    		if (indiceAcao > -1) {
-    	$scope.capitulo.acao.splice(indiceAcao, 1);
+    	   $scope.capitulo.acao.splice(indiceAcao, 1);
    		};
    		};
+         $scope.close = function(){
+            $rootScope.modalInstance.close();
+         };
 });
 						          
 
