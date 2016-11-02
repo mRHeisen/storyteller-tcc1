@@ -5,13 +5,19 @@
 		<a href="/#/lista/historia/{{historia._id}}" class="btn btn-primary">Voltar</a>
 		<hr>
 	</div>
-<div class="panel painel-cap col-xs-12 col-sm-3" style="background-color:#e6e6e6;">
-	<div class="panel-heading ">
-    		<p>
-    			{{historia.capitulos.texto}}
-    		</p>
-				<div ng-repeat="acao in historia.capitulos.acao">
-				    <button ng-click="capitulo(acao.numCapitulo)">{{acao.text}}</button>
-			    </div>
-	 </div>
+
+</div>
+<div class="container">
+  <div class="row row-centered">
+    <div class="col-centered panel painel-cap col-xs-12 col-sm-6" style="background-color:#e6e6e6;">
+			<div class="panel-heading">
+		    		<p>
+		    			{{historia.capitulos.texto}}
+		    		</p>
+						<div ng-repeat="acao in historia.capitulos.acao">
+						    <button class="col-xs-12" ng-click="capitulo(acao.numCapitulo)">{{acao.text}}</button>
+					    </div>
+			</div>
+    </div>
+  </div>
 </div>

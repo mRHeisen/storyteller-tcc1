@@ -3,7 +3,6 @@ angular.module('storyteller')
 	
 	$scope.capitulo = capitulo;
 
-
 	   	$scope.newLink = function(capitulo) {
    		ac = {num: 0, text: ""};
    		capitulo.acao.push(ac);

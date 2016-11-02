@@ -44,3 +44,14 @@ textarea {
     padding-bottom: 10px;
     
 }
+div{   
+    word-wrap: break-word;
+}
+.row-centered {
+    text-align:center;
+}
+.col-centered { 
+    display:inline-block; 
+    float:none; 
+    margin-right:-4px;
+}
