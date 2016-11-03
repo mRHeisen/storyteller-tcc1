@@ -5,7 +5,7 @@
 
 <form novalidate name="formulario" class="row">
 	<div>
-		<button class="btn btn-primary" ng-click="newCap()">Novo Capitulo</button>
+		<button class="btn btn-primary" ng-click="newCap()">Novo Capítulo</button>
 		<button type="submit" class="btn btn-primary" ng-click="submeter()" ng-disabled="formulario.$invalid">
 			Salvar
 		</button>
@@ -15,7 +15,7 @@
 <div class="panel painel-cap painel-animado col-xs-12 col-sm-3" ng-repeat="capitulo in historia.capitulos" style="background-color:#e6e6e6;">
 	<div class="panel-heading">
 		<label class="col-sm-6 col-xs-3">
-			Capitulo: {{$index}}
+			Capítulo: {{$index}}
 		</label>
 		<button type="button" class="btn btn-default btn-lg col-sm-3 btn-right" ng-click="removeCap(capitulo)">
   				<span class="glyphicon glyphicon-trash"></span>
@@ -33,7 +33,7 @@
     			<div class="modal-content">
 				        <div class="modal-header">
 
-				          <h4 class="modal-title">Ações do capitulo {{capitulo.numero}}</h4>
+				          <h4 class="modal-title">Ações do Capítulo {{capitulo.numero}}</h4>
 				        </div>
 				        <div class="modal-body">
 

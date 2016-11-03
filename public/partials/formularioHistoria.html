@@ -20,7 +20,7 @@
 			</span>
 		</div>
 		<div class="form-group">
-			<label>URL</label>
+			<label>URL da Capa</label>
 			<input name="url" class="form-control" ng-model="historia.url" required>
 
 			<span ng-show = "formulario.$submitted && formulario.url.$error.required" 
@@ -43,11 +43,11 @@
 				Descricao obrigatória
 		</div>
 		<div class="form-group">
-			<label>Genero</label>
+			<label>Gênero</label>
 			<select name="genero" ng-model="historia.genero" class="form-control" 
 					required ng-controller="GenerosController" 
 					ng-options="genero.nome as (genero.nome | uppercase) for genero in generos">
-				<option value="">Escolha um Genero</option>
+				<option value="">Escolha um Gênero</option>
 			</select>
 			<span ng-show="formulario.$submitted && formulario.genero.$error.required" 
 				class="form-control alert-danger">
