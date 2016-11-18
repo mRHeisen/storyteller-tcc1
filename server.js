@@ -8,10 +8,8 @@ httpProxy.createProxyServer({
     xfwd: true
 });
 
-var uristring =
-    process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/storyteller_db';
+var uristring = 'mongodb://miguelavilla:Miguel130992@ds157487.mlab.com:57487/heroku_f7vv86nb';
+
 
 var app = require('./config/express');
 var port = process.env.PORT || 3000;
