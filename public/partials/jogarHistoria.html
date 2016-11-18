@@ -14,6 +14,9 @@
 		    		<p>
 		    			{{historia.capitulos.texto}}
 		    		</p>
+		    		<p>
+		    			--FAÇA SUA ESCOLHA--
+		    		</p>
 						<div ng-repeat="acao in historia.capitulos.acao">
 						    <button class="col-xs-12" ng-click="capitulo(acao.numCapitulo)">{{acao.text}}</button>
 					    </div>
