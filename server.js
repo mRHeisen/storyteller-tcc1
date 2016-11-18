@@ -1,14 +1,5 @@
 var http =  require('http');
 
-
-httpProxy.createProxyServer({
-    target: 'https://storytellerx.herokuapp.com/',
-    toProxy: true,
-    changeOrigin: true,
-    xfwd: true
-});
-
-
 var uristring =
     process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
