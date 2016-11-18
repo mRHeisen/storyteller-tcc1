@@ -2,7 +2,7 @@ var http =  require('http');
 var httpProxy = require('http-proxy');
 
 httpProxy.createProxyServer({
-    target: 'http://localhost:3000',
+    target: 'https://storytellerxx.herokuapp.com/',
     toProxy: true,
     changeOrigin: true,
     xfwd: true
