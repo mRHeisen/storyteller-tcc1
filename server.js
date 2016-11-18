@@ -9,6 +9,7 @@ httpProxy.createProxyServer({
 });
 
 var uristring = 'mongodb://miguelavilla:Miguel130992@ds157487.mlab.com:57487/heroku_f7vv86nb';
+ 				// localBd 'mongodb://localhost/storyteller_db';
 
 
 var app = require('./config/express');

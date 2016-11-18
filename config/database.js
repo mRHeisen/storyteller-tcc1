@@ -4,9 +4,7 @@ var mongoose = require('mongoose');
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };       
  
-var mongodbUri = 'mongodb://miguelavilla:Miguel130992@ds157487.mlab.com:57487/heroku_f7vv86nb';
-
-mongoose.connect(mongodbUri);
+mongoose.connect(uri);
 
 mongoose.connection.on('connected', function(){
 	console.log("Contectado ao Mongo DB")
