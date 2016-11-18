@@ -1,4 +1,12 @@
 var http =  require('http');
+var httpProxy = require('http-proxy');
+
+httpProxy.createProxyServer({
+    target: 'http://localhost:3000',
+    toProxy: true,
+    changeOrigin: true,
+    xfwd: true
+});
 
 var uristring =
     process.env.MONGOLAB_URI ||
