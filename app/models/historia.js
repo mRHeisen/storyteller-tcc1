@@ -18,6 +18,10 @@ var schema = mongoose.Schema(
 		type: String,
 		require: true
 	},
+	pontuacao : {
+		type: Number,
+		require: true
+	},
 	capitulos : [
     {
         texto : String,

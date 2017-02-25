@@ -88,6 +88,22 @@ api.atualiza = function(req, res){
 			res.status(500).json(error);
 		});
 
+};
+api.pontuacao = function(req, res){
+	//Usa funçao do mongoose (findByIdAndUpdate) para procura pelo id que for passa e atulizar o mesmo documento no
+	//MongoDB
+	model
+		.findByIdAndUpdate(req.params.id, req.body)
+		.then(function(historia){ 
+			//Manda a pontuaçao atualizada
+			res.json(historia);
+		}, function(error){
+			//Mostra o erro no console
+			console.log(error);
+			//Manda o status 500 na requisição e o erro em json
+			res.status(500).json(error);
+		});
+
 
 };
 

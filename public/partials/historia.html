@@ -1,5 +1,6 @@
 <div class="page-header text-center">
 	<h1>{{historia.titulo}}</h1>
+	<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
 </div>
 	<div class="col-md-6">
 		<div>
@@ -15,6 +16,18 @@
 		<a href="/#/lista/historia/jogar/{{historia._id}}" class="btn btn-primary">Jogar</a>
 		<a href="/#/lista" class="btn btn-primary">Voltar</a>
 		<hr>
+		<div>
+			<h2>Avalie essa História:</h2><br>
+  		<input type="radio" ng-model="nota" value="0"> 0
+  		<input type="radio" ng-model="nota" value="1"> 1
+  		<input type="radio" ng-model="nota" value="2"> 2
+  		<input type="radio" ng-model="nota" value="3"> 3
+  		<input type="radio" ng-model="nota" value="4"> 4
+  		<input type="radio" ng-model="nota" value="5"> 5 <br>
+		<button type="submit" class="btn btn-primary" ng-click="avaliar(nota)" ng-disabled="formulario.$invalid">
+			Enviar
+		</button>
+		</div>
 	</div>
 	<div class="col-md-6">
 		<minha-historia url="{{historia.url}}" titulo="{{historia.titulo}}"></minha-historia>

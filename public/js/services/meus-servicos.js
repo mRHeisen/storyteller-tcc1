@@ -4,6 +4,9 @@ angular.module('meusServicos', ['ngResource'])
 		return $resource('/v1/historias/:historiaId', null, {
 			'update' : { 
 				method: 'PUT'
+			},
+			'patch' : { 
+				method: 'PATCH'
 			}
 		});
 	})
@@ -38,6 +41,20 @@ angular.module('meusServicos', ['ngResource'])
 						});
 					});
 				}
+			});
+		};
+		service.atualizarPontuacao = function(historia, pontuacao) {
+			return $q(function(resolve, reject) {
+				recursoHistorias.patch({historiaId: historia._id}, {pontuacao: pontuacao}, function() {
+						resolve({
+							inclusao: false
+						});
+					}, function(erro) {
+						console.log(erro);
+						reject({
+							mensagem: 'Não foi possível atualizar a historia ' + historia.titulo
+						});
+					});
 			});
 		};
 		return service;

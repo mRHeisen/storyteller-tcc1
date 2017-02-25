@@ -28,7 +28,7 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 		});
 		$routeProvider.when('/lista/historia/:historiaId', {
 			templateUrl: 'partials/historia.html',
-			controller: 'HistoriaController'
+			controller: 'AvaliaHistoriaController'
 		});
 
 		$routeProvider.when('/lista/historia/jogar/:historiaId', {

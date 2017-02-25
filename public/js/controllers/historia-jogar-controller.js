@@ -1,5 +1,5 @@
 angular.module('storyteller')
-	.controller('HistoriaJogarController', function($scope, recursoHistorias, $routeParams) {
+	.controller('HistoriaJogarController', function($scope, recursoHistorias, $routeParams, cadastroDeHistorias) {
 		$scope.historia = {};
 
 		
