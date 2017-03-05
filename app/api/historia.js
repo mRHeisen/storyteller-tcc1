@@ -8,7 +8,20 @@ var model = mongoose.model('Historia');
 //Retorna uma lista de historias
 api.lista = function(req, res){
 	//Find passa um obect vazil e usa promess para obter resultado
-	model
+	if(req.query.genero){
+		model
+		.find({genero: req.query.genero})
+		.then(function(historias){
+			//Manda a lista de historias se não houver erro em json
+			res.json(historias);
+		}, function(error){
+			//Mostra o erro no console
+			console.log(error);
+			//Manda o status 500 na requisição e o erro em json
+			res.status(500).json(error);
+		});
+	}else{
+		model
 		.find({})
 		.then(function(historias){
 			//Manda a lista de historias se não houver erro em json
@@ -19,6 +32,8 @@ api.lista = function(req, res){
 			//Manda o status 500 na requisição e o erro em json
 			res.status(500).json(error);
 		});
+	}
+	
 
 };
 //Busca historia pelo id

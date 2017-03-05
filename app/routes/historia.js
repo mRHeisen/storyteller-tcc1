@@ -4,7 +4,7 @@ module.exports = function(app){
     //Define o indentificador da rota em um unico lugar
      app.route('/v1/historias')
         .get(api.lista) //Buscar recurso com get / espera get e uma funcção
-        .post(api.adiciona);
+        .post(api.adiciona)
 
     //Define o indentificador da rota em um unico lugar
      app.route('/v1/historias/:id')
@@ -12,6 +12,5 @@ module.exports = function(app){
       .delete(api.removePorId) //Remove pelo id da historias
       .put(api.atualiza) //Atuliza historias pelo id
       .patch(api.pontuacao); //Atualiza puntuacao
-
-
+     
 };

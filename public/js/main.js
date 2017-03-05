@@ -3,39 +3,38 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 
 
 		$routeProvider.when('/historia', {
-			templateUrl: 'partials/minhasHistorias.html',
+			templateUrl: 'partials/usuario/minhasHistorias.html',
 			controller: 'HistoriasController'
 		});
 
 		$routeProvider.when('/historias/new', {
-			templateUrl: 'partials/formularioHistoria.html',
+			templateUrl: 'partials/usuario/formularioHistoria.html',
 			controller: 'HistoriaController'
 		});
 
 		$routeProvider.when('/historias/edit/:historiaId', {
-			templateUrl: 'partials/formularioHistoria.html',
+			templateUrl: 'partials/usuario/formularioHistoria.html',
 			controller: 'HistoriaController'
 		});
 
 		$routeProvider.when('/capitulos/edit/:historiaId', {
-			templateUrl: 'partials/formularioCapitulo.html',
+			templateUrl: 'partials/usuario/formularioCapitulo.html',
 			controller: 'CapitulosController'
 		});
 
 		$routeProvider.when('/lista', {
-			templateUrl: 'partials/listaHistorias.html',
-			controller: 'HistoriasController'
+			templateUrl: 'partials/historias/listaHistorias.html',
+			controller: 'ListaHistoriaController'
 		});
 		$routeProvider.when('/lista/historia/:historiaId', {
-			templateUrl: 'partials/historia.html',
+			templateUrl: 'partials/historias/historia.html',
 			controller: 'AvaliaHistoriaController'
 		});
 
 		$routeProvider.when('/lista/historia/jogar/:historiaId', {
-			templateUrl: 'partials/jogarHistoria.html',
+			templateUrl: 'partials/historias/jogarHistoria.html',
 			controller: 'HistoriaJogarController'
 		});
-
 
 	});
 

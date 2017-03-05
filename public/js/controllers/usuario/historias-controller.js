@@ -1,14 +1,16 @@
-angular.module('storyteller').controller('HistoriasController', function($scope, recursoHistorias) {
+angular.module('storyteller').controller('HistoriasController', function($scope, $http, recursoHistorias) {
 	
 	$scope.historias = [];
 	$scope.filtro = '';
 	$scope.mensagem = '';
 
+	
 	recursoHistorias.query(function(historias) {
 		$scope.historias = historias;
 	}, function(erro) {
 		console.log(erro);
 	});
+	
 	$scope.remover = function(historia) {
 
 		recursoHistorias.delete({historiaId: historia._id}, function() {

@@ -35,27 +35,21 @@ angular.module('storyteller')
 			var pontuacao;
 			switch (parseInt(avaliacao)) {
     			case 0:
-    			console.log("Nota"+avaliacao);
     			pontuacao = parseFloat($scope.historia.pontuacao) -100;
         		break;
     			case 1:
-    			console.log(avaliacao);
     			pontuacao = parseFloat($scope.historia.pontuacao) -50;
         		break;
     			case 2:
-    			console.log(avaliacao);
     			pontuacao = parseFloat($scope.historia.pontuacao) -20;
         		break;
     			case 3:
-    			console.log(avaliacao);
     			pontuacao = parseFloat($scope.historia.pontuacao) + 10;
         		break;
     			case 4:
-    			console.log(avaliacao);
     			pontuacao = parseFloat($scope.historia.pontuacao) + 50;
         		break;
     			case 5:
-    			console.log(avaliacao);
     			pontuacao = parseFloat($scope.historia.pontuacao) + 100;
         		break;
         		default :
@@ -66,16 +60,12 @@ angular.module('storyteller')
 			if (pontuacao <= 0){
 			cadastroDeHistorias.atualizarPontuacao($scope.historia, 0);
 			$scope.historia.pontuacao = 0;
-			console.log("Menor ou igual a 0");
-			console.log("Pontuação"+$scope.historia.pontuacao);
 			$scope.mensagem = null;
 			};
 
 			if(pontuacao > 0) {
 			cadastroDeHistorias.atualizarPontuacao($scope.historia, pontuacao);
 			$scope.historia.pontuacao = pontuacao;
-			console.log("Maior que 0");
-			console.log("Pontuação"+$scope.historia.pontuacao);
 			$scope.mensagem = null;
 			};
 

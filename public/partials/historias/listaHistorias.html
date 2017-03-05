@@ -1,0 +1,23 @@
+<div class="jumbotron">
+	<h1 class="text-center">Story-Teller</h1>
+</div>
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+<div class="row">
+	<div class="col-md-12">
+        <select class="form-control" ng-change="generos(SelectGenero.nome)" ng-model="SelectGenero" class="form-control" ng-options="genero.nome for genero in geneross">
+        <option value="">Todos</option>
+        </select>
+        <input class="form-control" placeholder="filtrar pelo título da Historia" 
+                    ng-model="filtro" ng-model-options="{ debounce: 500 }">
+    <br></br>
+	</div>
+</div> <!-- fim row -->
+<div class="row">
+    <meu-painel class="col-md-2 painel-animado" ng-repeat="historia in historias | filter: filtro" titulo="{{historia.titulo}}">
+        <minha-historia url="{{historia.url}}" alt="{{historia.titulo}}"></minha-historia>
+        <div> Pontuação: {{historia.pontuacao}}</div>
+        <a class="btn btn-primary btn-block" href="/#/lista/historia/{{historia._id}}">
+			Abrir
+		</a>
+    </meu-painel>
+</div>
