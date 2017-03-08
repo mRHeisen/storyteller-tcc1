@@ -1,6 +1,15 @@
 angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos', 'ui.bootstrap'])
 	.config(function($routeProvider, $locationProvider, $httpProvider) {
 
+		$routeProvider.when('/', {
+			templateUrl: 'partials/usuario/home.html',
+			controller: 'HomeController'
+		});
+
+		$routeProvider.when('/cadastro', {
+			templateUrl: 'partials/usuario/cadastroUsuario.html',
+			controller: 'CadastroUsuarioController'
+		});
 
 		$routeProvider.when('/historia', {
 			templateUrl: 'partials/usuario/minhasHistorias.html',

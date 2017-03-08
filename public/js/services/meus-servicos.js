@@ -10,6 +10,53 @@ angular.module('meusServicos', ['ngResource'])
 			}
 		});
 	})
+	.factory('recursoUsuario', function($resource) {
+
+		return $resource('/v1/usuario/:historiaId', null, {
+			'update' : { 
+				method: 'PUT'
+			},
+			'patch' : { 
+				method: 'PATCH'
+			}
+		});
+	})
+	.factory("cadastroDeUsuario", function(recursoUsuario, $q) {
+		var service = {};
+		service.cadastrar = function(usuario) {
+			return $q(function(resolve, reject) {
+
+				if(usuario._id) {
+					recursoUsuario.update({usuarioId: usuario._id}, usuario, function() {
+						resolve({
+							mensagem: 'Usuario ' + usuario.login + ' atualizada com sucesso',
+							inclusao: false
+						});
+					}, function(erro) {
+						console.log(erro);
+						reject({
+							mensagem: 'Não foi possível atualizar  o usuario ' + usuario.login
+						});
+					});
+
+				} else {
+					console.log(usuario);
+					recursoUsuario.save(usuario, function() {
+						resolve({
+							mensagem: 'Usuario ' + usuario.login + ' incluída com sucesso',
+							inclusao: true
+						});
+					}, function(erro) {
+						console.log(erro);
+						reject({
+							mensagem: 'Não foi possível incluir o usuario ' + usuario.login
+						});
+					});
+				}
+			});
+		};
+		return service;
+    })
 	.factory("cadastroDeHistorias", function(recursoHistorias, $q) {
 		var service = {};
 		service.cadastrar = function(historia) {
