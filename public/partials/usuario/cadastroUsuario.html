@@ -49,7 +49,7 @@
 <div id="loginUser" class="col-md-3">
 		<div class="form-group">
 			<label>Login:</label>
-			<input name="login" class="form-control" ng-model="usuarioCheck.login">  
+			<input name="login" class="form-control" ng-model="usuarioLogin.login">  
 
 			<span ng-show = "formulario.$submitted && formulario.titulo.$error.required"
 				class="form-control alert-danger">
@@ -58,9 +58,9 @@
 		</div>
 		<div class="form-group">
 			<label>Senha:</label>
-			<input type="password" name="senha" class="form-control" ng-model="usuarioCheck.senha"> 
+			<input type="password" name="senha" class="form-control" ng-model="usuarioLogin.senha"> 
 		</div>
-		<button type="submit" href="/#/" class="btn btn-primary">
+		<button ng-click="autenticar(usuarioLogin)" href="/#/" class="btn btn-primary">
 			Entrar
 		</button>
 </div>

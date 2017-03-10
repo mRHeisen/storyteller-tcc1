@@ -34,6 +34,7 @@
 		<script src="js/controllers/usuario/cadastro-usuario-controller.js"></script>
 		<script src="js/directives/minhas-diretivas.js"></script>
         <script src="js/services/meus-servicos.js"></script>
+        <script src="js/services/token-interceptor.js"></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse">
@@ -53,7 +54,7 @@
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
 		        <li><a href="#/cadastro"><span class="glyphicon glyphicon-user"></span> Cadastrar</a></li>
-		        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
+		        <li><a required ng-controller="CadastroUsuarioController" ng-click="sair()"href="/#/cadastro"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
 		      </ul>
 		    </div>
 		  </div>

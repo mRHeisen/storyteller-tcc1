@@ -1,7 +1,8 @@
 angular.module('storyteller')
-	.controller('CadastroUsuarioController', function($scope, $routeParams, cadastroDeUsuario, recursoUsuario) {
+	.controller('CadastroUsuarioController', function($scope, $routeParams, $http, $location, $window, cadastroDeUsuario, recursoUsuario) {
 		 
 		 $scope.usuario = {};
+		 $scope.usuarioLogin = {};
 		 $scope.mensagem = '';
 
         $scope.submeter = function(login) {
@@ -24,29 +25,23 @@ angular.module('storyteller')
 			},function(erro) {
 			console.log(erro);
 			});
-		};	    
-
-		$scope.ronaldo = function(login) {
-
-				recursoUsuario.query({login: login}, function(usuario){
-				if(usuario[0]){
-					$scope.mensagem = 'login ja utilizado.';
-				}else{
-					if ($scope.formulario.$valid) {
-				cadastroDeUsuario.cadastrar($scope.usuario)
-				.then(function(dados) {
-					$scope.mensagem = dados.mensagem;
-					if (dados.inclusao) $scope.usuario = {};
-				})
-				.catch(function(erro) {
-					$scope.mensagem = erro.mensagem;
-				});
-			}
-					console.log("nao tem");
-				}
-				}, function(erro) {
-				console.log(erro);
-				});
-            		
 		};
+
+		$scope.autenticar = function (usuarioLogin){
+		$http.post('/autenticar',
+			{login: usuarioLogin.login, senha: usuarioLogin.senha})
+			.then(function(){
+				$location.path('/');
+			}, function(error){
+				console.log(error);
+				$scope.usuario = {};
+				$scope.mensagem = 'Login ou senha invalidos';
+			});
+
+	};	 
+
+	$scope.sair = function (){
+		delete $window.sessionStorage.token
+	};
+
 }); 

@@ -5,6 +5,9 @@ var api = {};
 //Relaciona o model feito em models/usuario para var model
 var model = mongoose.model('Usuario');
 
+api.testeApi = function(req, res){
+console.log("entrou na apiTeste Usuario");
+};
 //Retorna uma lista de usuarios
 api.lista = function(req, res){
 	//Find passa um obect vazil e usa promess para obter resultado
@@ -22,7 +25,7 @@ api.lista = function(req, res){
 		});
 	}else{
 		model
-		.find({})
+		.find({}, 'nome login')
 		.then(function(usuarios){
 			//Manda a lista de usuarios se não houver erro em json
 			res.json(usuarios);

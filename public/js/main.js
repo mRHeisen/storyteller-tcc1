@@ -1,6 +1,8 @@
 angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos', 'ui.bootstrap'])
 	.config(function($routeProvider, $locationProvider, $httpProvider) {
 
+		$httpProvider.interceptors.push('tokenInterceptor');
+
 		$routeProvider.when('/', {
 			templateUrl: 'partials/usuario/home.html',
 			controller: 'HomeController'
@@ -44,6 +46,8 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 			templateUrl: 'partials/historias/jogarHistoria.html',
 			controller: 'HistoriaJogarController'
 		});
+
+		$routeProvider.otherwise({redirectTo: '/'});
 
 	});
 
