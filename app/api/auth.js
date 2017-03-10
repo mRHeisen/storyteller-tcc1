@@ -37,7 +37,6 @@ api.autentica = function(req,res){
 api.verificaToken = function(req,res, next){
 	// Acessa a informação x-access-token do cabeçalho da requisição
 	var token = req.headers['x-access-token'];
-	console.log("Token: "+token);
 	if(token) {
 		console.log('Verificando Token...')
 		//Utiliza função verify do jsonWebToken para verificar o token
