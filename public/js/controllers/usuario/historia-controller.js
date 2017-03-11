@@ -1,5 +1,6 @@
 angular.module('storyteller')
-	.controller('HistoriaController', function($scope, recursoHistorias, $routeParams, cadastroDeHistorias) {
+	.controller('HistoriaController', function($scope, recursoHistorias, $routeParams, $window, cadastroDeHistorias) {
+
 
 		$scope.historia = {};
 		$scope.mensagem = '';
@@ -16,6 +17,7 @@ angular.module('storyteller')
 		$scope.submeter = function() {
 
 			if ($scope.formulario.$valid) {
+				$scope.historia.autor = $window.sessionStorage.login;
 				cadastroDeHistorias.cadastrar($scope.historia)
 				.then(function(dados) {
 					$scope.mensagem = dados.mensagem;

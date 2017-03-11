@@ -1,5 +1,8 @@
+module.exports = function(app) {
 //Importa mongoose
 var mongoose = require('mongoose');
+//importa jsonwebtoken
+var jwt = require('jsonwebtoken');
 //Cria objeto javaScrpit em branco
 var api = {};
 //Relaciona o model feito em models/historia para var model
@@ -7,6 +10,20 @@ var model = mongoose.model('Historia');
 
 //Retorna uma lista de historias
 api.lista = function(req, res){
+	
+	if(req.query.login){
+		model
+		.find({autor: req.query.login})
+		.then(function(historias){
+			//Manda a lista de historias se não houver erro em json
+			res.json(historias);
+		}, function(error){
+			//Mostra o erro no console
+			console.log(error);
+			//Manda o status 500 na requisição e o erro em json
+			res.status(500).json(error);
+		});
+	};
 	//Find passa um obect vazil e usa promess para obter resultado
 	if(req.query.ranque){
 		model
@@ -135,5 +152,6 @@ api.pontuacao = function(req, res){
 
 
 };
+	return api;
+}
 
-module.exports = api;

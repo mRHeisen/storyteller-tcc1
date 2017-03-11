@@ -6,6 +6,10 @@ var schema = mongoose.Schema(
 		type: String,
 		require: true
 	},
+	autor: {
+		type: String,
+		require: true
+	},
 	url : {
 		type: String,
 		require: true

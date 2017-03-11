@@ -5,7 +5,7 @@ angular.module('storyteller')
 		//Poriedade response que sera chamada toda vez que receber uma resposta do servidor
 		interceptor.response = function(response){
 			var token = response.headers('x-access-token');
-			if(token){				
+			if(token){		
 				$window.sessionStorage.token = token;
 				console.log("Armazenado token recebido no navegador");
 			}
@@ -27,6 +27,7 @@ angular.module('storyteller')
 			//Se receber 401 sera redirecionando
 			if(rejection != null && rejection.status == 401){
 				delete $window.sessionStorage.token;
+				delete $window.sessionStorage.login;
 				$location.path('/cadastro');
 			}
 			return $q.reject(rejection);

@@ -31,6 +31,7 @@ angular.module('storyteller')
 		$http.post('/autenticar',
 			{login: usuarioLogin.login, senha: usuarioLogin.senha})
 			.then(function(){
+				$window.sessionStorage.login = usuarioLogin.login;
 				$location.path('/');
 			}, function(error){
 				console.log(error);

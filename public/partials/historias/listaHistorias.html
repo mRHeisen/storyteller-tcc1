@@ -1,6 +1,7 @@
 <div class="jumbotron">
 	<h1 class="text-center">Story-Teller</h1>
 </div>
+<h1>!!!!!ORDENAR RANQUE/GENERO PELO ANGULAR, ARUMAR MODO DE AVALIÇAO COM STAR, USUARIO, QUANTIDADE!!!!</h1>
 <p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
 <div class="row">
 	<div class="col-md-12">
@@ -12,12 +13,23 @@
     <br></br>
 	</div>
 </div> <!-- fim row -->
-<div class="row">
-    <meu-painel class="col-md-2 painel-animado" ng-repeat="historia in historias | filter: filtro" titulo="{{historia.titulo}}">
+<div class="col-md-12">
+<div class="col-md-10 painel-animado">
+    <meu-painel class="col-md-3 painel-animado" ng-repeat="historia in historias | filter: filtro" titulo="{{historia.titulo}}">
         <minha-historia url="{{historia.url}}" alt="{{historia.titulo}}"></minha-historia>
         <div> Pontuação: {{historia.pontuacao}}</div>
         <a class="btn btn-primary btn-block" href="/#/lista/historia/{{historia._id}}">
 			Abrir
 		</a>
     </meu-painel>
+</div>
+<div class="col-md-2">
+    <h2>Top 10:</h2>
+    <li ng-repeat="historiaRanque in historiasRanque | filter: filtro">
+    <a href="/#/lista/historia/{{historiaRanque._id}}">
+        {{historiaRanque.titulo}}
+        {{historiaRanque.pontuacao}}
+    </a>
+    </li>
+</div>
 </div>

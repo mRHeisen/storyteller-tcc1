@@ -4,8 +4,8 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 		$httpProvider.interceptors.push('tokenInterceptor');
 
 		$routeProvider.when('/', {
-			templateUrl: 'partials/usuario/home.html',
-			controller: 'HomeController'
+			templateUrl: 'partials/historias/listaHistorias.html',
+			controller: 'ListaHistoriaController'
 		});
 
 		$routeProvider.when('/cadastro', {
