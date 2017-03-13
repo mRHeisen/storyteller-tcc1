@@ -90,9 +90,9 @@ angular.module('meusServicos', ['ngResource'])
 				}
 			});
 		};
-		service.atualizarPontuacao = function(historia, pontuacao) {
+		service.atualizarPontuacao = function(historiaId, pontuacao, votos) {
 			return $q(function(resolve, reject) {
-				recursoHistorias.patch({historiaId: historia._id}, {pontuacao: pontuacao}, function() {
+				recursoHistorias.patch({historiaId: historiaId}, {pontuacao: pontuacao, votos: votos}, function() {
 						resolve({
 							inclusao: false
 						});

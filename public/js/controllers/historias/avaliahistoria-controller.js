@@ -1,23 +1,18 @@
 angular.module('storyteller')
-	.controller('AvaliaHistoriaController', function($scope, recursoHistorias, $routeParams, cadastroDeHistorias) {
+	.controller('AvaliaHistoriaController', function($scope, recursoHistorias, $routeParams, $window, cadastroDeHistorias) {
 		$scope.historia = {};
 		$scope.mensagem = '';
 
+		var login = $window.sessionStorage.login;
 		
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
 				$scope.historia = historia;
-				if(!$scope.historia.pontuacao){
-					$scope.historia.pontuacao = 0;
-				};
-
 			}, function(erro) {
 				console.log(erro);
 				$scope.mensagem = 'Não foi possível obter historia'
 			});
 		};
-
-
 
 		$scope.submeter = function() {
 			if ($scope.formulario.$valid) {
@@ -31,47 +26,69 @@ angular.module('storyteller')
 				});
 			}
 		};
-		$scope.avaliar = function(avaliacao) {
-			var pontuacao;
-			switch (parseInt(avaliacao)) {
+
+		regraNota = function(nota){
+
+			switch (parseInt(nota)) {
     			case 0:
-    			pontuacao = parseFloat($scope.historia.pontuacao) -100;
+    			total = parseFloat(-100);
         		break;
     			case 1:
-    			pontuacao = parseFloat($scope.historia.pontuacao) -50;
+    			total = parseFloat(-50);
         		break;
     			case 2:
-    			pontuacao = parseFloat($scope.historia.pontuacao) -20;
+    			total = parseFloat(-25);
         		break;
     			case 3:
-    			pontuacao = parseFloat($scope.historia.pontuacao) + 10;
+    			total = parseFloat(25);
         		break;
     			case 4:
-    			pontuacao = parseFloat($scope.historia.pontuacao) + 50;
+    			total = parseFloat(50);
         		break;
     			case 5:
-    			pontuacao = parseFloat($scope.historia.pontuacao) + 100;
+    			total = parseFloat(100);
         		break;
         		default :
         			$scope.mensagem = 'Escolha um numero';
         		break;
+			}
+			return total;
+		};
 
-			}			 
-			if (pontuacao <= 0){
-			cadastroDeHistorias.atualizarPontuacao($scope.historia, 0);
-			$scope.historia.pontuacao = 0;
-			$scope.mensagem = null;
-			};
+		enviarAvaliacao = function(pontuacao, nota){
+			for(var i=0; i < $scope.historia.votos.length; i++){
+				if($scope.historia.votos[i].usuario === login){
+					var achou = true;
+					pontuacaoFinal = (pontuacao) - (regraNota($scope.historia.votos[i].nota)) + (regraNota(nota)); 
+					$scope.historia.votos[i] = {usuario : login, nota : nota};
+					if(pontuacaoFinal < 0){
+						pontuacaoFinal = 0;
+					};
+					cadastroDeHistorias.atualizarPontuacao($scope.historia._id, pontuacaoFinal, $scope.historia.votos);
+					$scope.historia.pontuacao = pontuacaoFinal;
+					$scope.mensagem = 'Voto atualizado!';	
+					break;
+				};
+			}
+			if(!achou){
+				$scope.historia.votos.push({usuario : login, nota : nota});
+				var votos = $scope.historia.votos;
+				pontuacaoFinal = ($scope.historia.pontuacao) + (regraNota(nota));
+				if(pontuacaoFinal < 0){
+					pontuacaoFinal = 0;
+				};
+				cadastroDeHistorias.atualizarPontuacao($scope.historia._id, pontuacaoFinal, $scope.historia.votos);
+				$scope.historia.pontuacao = pontuacaoFinal;
+				$scope.mensagem = 'Obrigado por votar';	
+			}
 
-			if(pontuacao > 0) {
-			cadastroDeHistorias.atualizarPontuacao($scope.historia, pontuacao);
-			$scope.historia.pontuacao = pontuacao;
-			$scope.mensagem = null;
-			};
-
-			if(!avaliacao) {
+		};
+		$scope.avaliar = function(nota) {
+			if(!nota) {
 				$scope.mensagem = 'Escolha um numero';
-			};
+			}else{
+			enviarAvaliacao($scope.historia.pontuacao, nota);
+		}
 		};
 
 	});

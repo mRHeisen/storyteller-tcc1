@@ -18,6 +18,20 @@ angular.module('storyteller')
 
 			if ($scope.formulario.$valid) {
 				$scope.historia.autor = $window.sessionStorage.login;
+				var historia = $scope.historia;
+				if(!historia.pontuacao){
+					//Nova historia ainda nao tem pontuacao!
+				historia.pontuacao = 0;
+				cadastroDeHistorias.cadastrar(historia)
+				.then(function(dados) {
+					$scope.mensagem = dados.mensagem;
+					if (dados.inclusao) $scope.historia = {};
+				})
+				.catch(function(erro) {
+					$scope.mensagem = erro.mensagem;
+				});	
+				}else{
+					//historia ja tem pontuacao!
 				cadastroDeHistorias.cadastrar($scope.historia)
 				.then(function(dados) {
 					$scope.mensagem = dados.mensagem;
@@ -25,7 +39,9 @@ angular.module('storyteller')
 				})
 				.catch(function(erro) {
 					$scope.mensagem = erro.mensagem;
-				});
+				});	
+				}
+
 			}
 		};
 	});

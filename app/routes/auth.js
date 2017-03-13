@@ -8,6 +8,6 @@ module.exports = function(app){
         .get(apiUsuario.lista) //Buscar recurso com get / espera get e uma funcção
         .post(apiUsuario.adiciona);
         
-	app.use('/*', api.verificaToken);
+	//app.use('/*', api.verificaToken);
 
 };

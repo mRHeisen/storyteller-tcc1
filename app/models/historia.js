@@ -23,9 +23,15 @@ var schema = mongoose.Schema(
 		require: true
 	},
 	pontuacao : {
-		type: Number,
+		type :  Number,
 		require: true
 	},
+	votos : [
+	{
+		usuario : String,
+		nota : Number
+	}
+	],
 	capitulos : [
     {
         texto : String,

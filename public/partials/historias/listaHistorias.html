@@ -1,7 +1,7 @@
 <div class="jumbotron">
 	<h1 class="text-center">Story-Teller</h1>
 </div>
-<h1>!!!!!ORDENAR RANQUE/GENERO PELO ANGULAR, ARUMAR MODO DE AVALIÇAO COM STAR, USUARIO, QUANTIDADE!!!!</h1>
+    <h1>Arrumar rota de editar Historias/Capitulos para apenas usuarios que sao autores da historias poderem acessar. E avaliacoes com Star</h1>
 <p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
 <div class="row">
 	<div class="col-md-12">
@@ -25,10 +25,10 @@
 </div>
 <div class="col-md-2">
     <h2>Top 10:</h2>
-    <li ng-repeat="historiaRanque in historiasRanque | filter: filtro">
-    <a href="/#/lista/historia/{{historiaRanque._id}}">
-        {{historiaRanque.titulo}}
-        {{historiaRanque.pontuacao}}
+    <li ng-repeat="historia in historias | orderBy:'-pontuacao'">
+    <a href="/#/lista/historia/{{historia._id}}">
+        {{historia.titulo}}
+        {{historia.pontuacao}}
     </a>
     </li>
 </div>
