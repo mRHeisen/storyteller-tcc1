@@ -1,19 +1,22 @@
 <div class="jumbotron">
 	<h1 class="text-center">Story-Teller</h1>
 </div>
-    <h1>Arrumar rota de editar Historias/Capitulos para apenas usuarios que sao autores da historias poderem acessar. E avaliacoes com Star</h1>
+
+<jk-rating-stars max-rating="8" rating="ctrl.rating" read-only="ctrl.readOnly" on-rating="ctrl.onRating(rating)" >
+</jk-rating-stars>
+
 <p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
 <div class="row">
 	<div class="col-md-12">
         <select class="form-control" ng-change="generos(SelectGenero.nome)" ng-model="SelectGenero" class="form-control" ng-options="genero.nome for genero in geneross">
         <option value="">Todos</option>
         </select>
-        <input class="form-control" placeholder="filtrar pelo título da Historia" 
+        <input class="form-control" placeholder="Filtrar pelo título" 
                     ng-model="filtro" ng-model-options="{ debounce: 500 }">
     <br></br>
 	</div>
 </div> <!-- fim row -->
-<div class="col-md-12">
+<div class="row">
 <div class="col-md-10 painel-animado">
     <meu-painel class="col-md-3 painel-animado" ng-repeat="historia in historias | filter: filtro" titulo="{{historia.titulo}}">
         <minha-historia url="{{historia.url}}" alt="{{historia.titulo}}"></minha-historia>

@@ -1,5 +1,5 @@
 angular.module('storyteller')
-	.controller('AvaliaHistoriaController', function($scope, recursoHistorias, $routeParams, $window, cadastroDeHistorias) {
+	.controller('AvaliaHistoriaController', function($scope, recursoHistorias, $routeParams, $window, $location, cadastroDeHistorias) {
 		$scope.historia = {};
 		$scope.mensagem = '';
 
@@ -7,7 +7,11 @@ angular.module('storyteller')
 		
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
-				$scope.historia = historia;
+				if(historia.disponivel === true){
+					$scope.historia = historia;
+				}else{
+					$location.path('/erro');
+			};
 			}, function(erro) {
 				console.log(erro);
 				$scope.mensagem = 'Não foi possível obter historia'
@@ -59,35 +63,30 @@ angular.module('storyteller')
 			for(var i=0; i < $scope.historia.votos.length; i++){
 				if($scope.historia.votos[i].usuario === login){
 					var achou = true;
-					pontuacaoFinal = (pontuacao) - (regraNota($scope.historia.votos[i].nota)) + (regraNota(nota)); 
+					pontuacaoFinal = pontuacao - regraNota($scope.historia.votos[i].nota) + regraNota(nota); 
 					$scope.historia.votos[i] = {usuario : login, nota : nota};
-					if(pontuacaoFinal < 0){
-						pontuacaoFinal = 0;
-					};
 					cadastroDeHistorias.atualizarPontuacao($scope.historia._id, pontuacaoFinal, $scope.historia.votos);
 					$scope.historia.pontuacao = pontuacaoFinal;
 					$scope.mensagem = 'Voto atualizado!';	
 					break;
 				};
 			}
-			if(!achou){
-				$scope.historia.votos.push({usuario : login, nota : nota});
-				var votos = $scope.historia.votos;
-				pontuacaoFinal = ($scope.historia.pontuacao) + (regraNota(nota));
-				if(pontuacaoFinal < 0){
-					pontuacaoFinal = 0;
-				};
-				cadastroDeHistorias.atualizarPontuacao($scope.historia._id, pontuacaoFinal, $scope.historia.votos);
-				$scope.historia.pontuacao = pontuacaoFinal;
-				$scope.mensagem = 'Obrigado por votar';	
+				if(!achou){
+					$scope.historia.votos.push({usuario : login, nota : nota});
+					var votos = $scope.historia.votos;
+					pontuacaoFinal = $scope.historia.pontuacao + regraNota(nota);
+					cadastroDeHistorias.atualizarPontuacao($scope.historia._id, pontuacaoFinal, $scope.historia.votos);
+					$scope.historia.pontuacao = pontuacaoFinal;
+					$scope.mensagem = 'Obrigado por votar';	
 			}
 
 		};
+
 		$scope.avaliar = function(nota) {
 			if(!nota) {
 				$scope.mensagem = 'Escolha um numero';
 			}else{
-			enviarAvaliacao($scope.historia.pontuacao, nota);
+				enviarAvaliacao($scope.historia.pontuacao, nota);
 		}
 		};
 

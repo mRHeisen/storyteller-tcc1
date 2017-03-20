@@ -27,7 +27,7 @@ api.lista = function(req, res){
 	//Find passa um obect vazil e usa promess para obter resultado
 	if(req.query.ranque){
 		model
-		.find({}).sort({pontuacao: -1}).limit(10)
+		.find({disponivel:true}).sort({pontuacao: -1}).limit(10)
 		.then(function(historias){
 			//Manda a lista de historias se não houver erro em json
 			res.json(historias);
@@ -40,7 +40,7 @@ api.lista = function(req, res){
 	};
 	if(req.query.genero){
 		model
-		.find({genero: req.query.genero})
+		.find({genero: req.query.genero, disponivel:true})
 		.then(function(historias){
 			//Manda a lista de historias se não houver erro em json
 			res.json(historias);
@@ -53,7 +53,7 @@ api.lista = function(req, res){
 	};
 	if(!req.query.genero && !req.query.ranque){
 		model
-		.find({})
+		.find({disponivel:true})
 		.then(function(historias){
 			//Manda a lista de historias se não houver erro em json
 			res.json(historias);

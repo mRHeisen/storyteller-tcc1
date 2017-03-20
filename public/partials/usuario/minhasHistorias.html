@@ -6,32 +6,29 @@
 	{{mensagem}}
 </p>
 
-<div class="row">
-	<div class="col-md-12">
-		<form>
+<div class="row col-md-12">
 			<div class="input-group">
 				<span class="input-group-btn">
 					<a href="/#/historias/new" class="btn btn-primary" type="button">
 						Nova Historia
 					</a>
 				</span>
-				<input class="form-control" placeholder="filtrar pelo título da Historia" 
-					ng-model="filtro" ng-model-options="{ debounce: 500 }">
 			</div>
-		</form>
-	</div> <!-- fim col-md-12 -->
 </div> <!-- fim row -->
-
+<br></br>
 <div class="row">
-    <meu-painel class="col-md-2 painel-animado" ng-repeat="historia in historias | filter: filtro" titulo="{{historia.titulo}}">
+    <meu-painel class="col-md-2 painel-animado" ng-repeat="historia in historias" titulo="{{historia.titulo}}">
         <minha-historia url="{{historia.url}}" alt="{{historia.titulo}}"></minha-historia>
-
+        Pontuação: {{historia.pontuacao}}
 		<a class="btn btn-primary btn-block" href="/#/historias/edit/{{historia._id}}">
 			Editar
 		</a>
 		<a class="btn btn-primary btn-block" href="/#/capitulos/edit/{{historia._id}}">
 			Capitulos
 		</a>
-		<meu-botao-perigo nome="Remover" acao="remover(historia)">Remover</meu-botao-perigo>
+		<button class="btn btn-primary btn-block" ng-click="disp(historia)">
+			Liberar/Retirar
+		</button>
+		<button class="btn btn-danger btn-block" ng-click="remover(historia)">Remover</button>
     </meu-painel>
 </div>

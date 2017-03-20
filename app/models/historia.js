@@ -32,6 +32,10 @@ var schema = mongoose.Schema(
 		nota : Number
 	}
 	],
+	disponivel : {
+		type: Boolean,
+		require: true
+	},
 	capitulos : [
     {
         texto : String,

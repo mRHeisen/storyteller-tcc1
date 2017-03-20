@@ -55,4 +55,14 @@ div{
     float:none; 
     margin-right:-4px;
 }
+.footer {
+    width:100%; 
+    float:left; 
+    background:#333; 
+    z-index:-9999;
+    position: fixed;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+}
 

@@ -47,7 +47,6 @@ api.verificaToken = function(req,res, next){
 		}
 		//Guarda a informação decodificado no usuario
 		req.usuario = decoded;
-		console.log(decoded.login);
 		// libera as proximos midlware
 		next();
 	});

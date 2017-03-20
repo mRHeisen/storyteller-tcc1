@@ -4,6 +4,7 @@ angular.module('storyteller')
 		 $scope.usuario = {};
 		 $scope.usuarioLogin = {};
 		 $scope.mensagem = '';
+		 $scope.showMe = false;
 
         $scope.submeter = function(login) {
 
@@ -27,7 +28,7 @@ angular.module('storyteller')
 			});
 		};
 
-		$scope.autenticar = function (usuarioLogin){
+		$scope.autenticar = function (usuarioLogin) {
 		$http.post('/autenticar',
 			{login: usuarioLogin.login, senha: usuarioLogin.senha})
 			.then(function(){
@@ -39,10 +40,14 @@ angular.module('storyteller')
 				$scope.mensagem = 'Login ou senha invalidos';
 			});
 
-	};	 
+		};	 
 
-	$scope.sair = function (){
-		delete $window.sessionStorage.token
-	};
+		$scope.sair = function () {
+		delete $window.sessionStorage.token;	
+		delete $window.sessionStorage.login;
+		};
 
+		$scope.novoUsuario = function() {
+        $scope.showMe = !$scope.showMe;
+    	};
 }); 

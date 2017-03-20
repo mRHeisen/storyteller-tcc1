@@ -1,4 +1,4 @@
-angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos', 'ui.bootstrap'])
+angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos', 'ui.bootstrap', 'ngSanitize'])
 	.config(function($routeProvider, $locationProvider, $httpProvider) {
 
 		$httpProvider.interceptors.push('tokenInterceptor');
@@ -6,6 +6,16 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 		$routeProvider.when('/', {
 			templateUrl: 'partials/historias/listaHistorias.html',
 			controller: 'ListaHistoriaController'
+		});
+
+		$routeProvider.when('/home', {
+			templateUrl: 'partials/usuario/home.html',
+			controller: 'HomeController'
+		});
+
+		$routeProvider.when('/erro', {
+			templateUrl: 'partials/erro404.html',
+			controller: 'HomeController'
 		});
 
 		$routeProvider.when('/cadastro', {

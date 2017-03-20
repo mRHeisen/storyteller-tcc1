@@ -1,6 +1,6 @@
 var http =  require('http');
 
-			   // mongodb://<MiguelAvilla>:<Miguel130992>@ds127190.mlab.com:27190/heroku_m2qb8tk1
+			   
 var uristring = //'mongodb://MiguelAvilla:Miguel130992@ds127190.mlab.com:27190/heroku_m2qb8tk1';
  				'mongodb://localhost/storyteller_db';
 
