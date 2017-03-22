@@ -56,20 +56,21 @@ angular.module('storyteller')
         	});
 
     	};
-    	for(var i=0; i < historia.capitulos.length; i++){
-    		
-    	}
     	checkHistoria = function(historia){
 		var liberada = {
 			situacao : null,
-			mensagem : ''
+			mensagem : 'nao contem um capitulo final'
 		};
-		var existeFinal;
+
+		var arrayAcao = [];
+		var existeFinal = false;
 		var acoesCorretas = true;
+		
 		for(var i=0; i < historia.capitulos.length; i++){
 				if(historia.capitulos[i].acao.length){
 					for(var k=0; k < historia.capitulos[i].acao.length; k++){
 						var indexCap = historia.capitulos[i].acao[k].numCapitulo;
+						arrayAcao.push(indexCap);
 						//var testCap = historia.capitulos[i];
 							if(!historia.capitulos[indexCap]){
 								liberada.mensagem = "No capitulo: "+i+" A acão: "+historia.capitulos[i].acao[k].text+", leva para um capitulo inexistente";
@@ -79,24 +80,30 @@ angular.module('storyteller')
 								liberada.mensagem = "No capitulo: "+i+" A acão: "+historia.capitulos[i].acao[k].text+", leva para seu capitulo de origem";
 								acoesCorretas = false;
 								break;
-							}else if(i != indexCap){
-								acoesCorretas = false;
-								liberada.mensagem = "nao existem nenhuma acao que leve para o capitulo: "+i;
-								break;
 							}else{
 								acoesCorretas = true;
 							};
-								existeFinal = false;
-								liberada.mensagem = 'nao contem um capitulo final';
+								console.log("Nao é um capitulo final: "+i)
 					};			
 				}else{
+					console.log("Capitulo final: "+i)
 					existeFinal = true;
-					//acoesCorretas = true;
 				};
 		};
 
+		for(var i=0; i < historia.capitulos.length; i++){
+			if(i > 0 && arrayAcao.indexOf(i) < 0){
+				console.log(arrayAcao);
+				liberada.mensagem = "Não existe nenhuma acao que leve para o capitulo: "+i;
+				acoesCorretas = false;
+				//break;						
+				}else if(i > 0 && arrayAcao.indexOf(i) > 0){
+				//acoesCorretas = true;
+				console.log(arrayAcao);
+				console.log("Capitulo "+i+" tem "+arrayAcao.indexOf(i)+" ligacoes");
+				};
+		};
 			console.log("Tem final? "+existeFinal+" Acoes corretas? "+acoesCorretas)
-
 			if(existeFinal === true && acoesCorretas === true){
 				liberada.situacao = true;
 			}else{
