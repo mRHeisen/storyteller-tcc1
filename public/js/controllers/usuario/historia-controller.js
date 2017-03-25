@@ -7,7 +7,7 @@ angular.module('storyteller')
 
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
-				if(historia.autor == $window.sessionStorage.login){
+				if(historia.autor == $window.localStorage.login){
 					$scope.historia = historia;
 				}else{
 				$location.path('/erro');
@@ -33,7 +33,7 @@ angular.module('storyteller')
 		$scope.submeter = function() {
 
 			if ($scope.formulario.$valid) {
-				$scope.historia.autor = $window.sessionStorage.login;
+				$scope.historia.autor = $window.localStorage.login;
 				$scope.historia.disponivel = false;
 				var historia = $scope.historia;
 				//Nova historia ainda nao tem pontuacao!

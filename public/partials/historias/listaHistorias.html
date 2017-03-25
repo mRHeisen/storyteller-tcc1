@@ -27,7 +27,7 @@
     </meu-painel>
 </div>
 <div class="col-md-2">
-    <h2>Top 10:</h2>
+    <h2>Melhores:</h2>
     <li ng-repeat="historia in historias | orderBy:'-pontuacao'">
     <a href="/#/lista/historia/{{historia._id}}">
         {{historia.titulo}}

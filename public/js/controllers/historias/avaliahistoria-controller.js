@@ -3,7 +3,7 @@ angular.module('storyteller')
 		$scope.historia = {};
 		$scope.mensagem = '';
 
-		var login = $window.sessionStorage.login;
+		var login = $window.localStorage.login;
 		
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {

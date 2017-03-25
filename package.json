@@ -4,11 +4,9 @@
   "description": "Aplicação para livros-jogos digitais",
   "main": "server.js",
   "dependencies": {
-    "angular-jk-rating-stars": "^1.0.6",
     "body-parser": "^1.15.2",
     "consign": "^0.1.2",
     "express": "^4.14.0",
-    "http-proxy": "^1.15.2",
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.6.0"
   },

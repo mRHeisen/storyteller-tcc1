@@ -5,7 +5,7 @@ angular.module('storyteller')
 		
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
-				if(historia.autor == $window.sessionStorage.login){
+				if(historia.autor == $window.localStorage.login){
 					$scope.historia = historia;
 				}else{
 				$location.path('/erro');
@@ -26,7 +26,7 @@ angular.module('storyteller')
 					$scope.mensagem = erro.mensagem;
 				});
 			}else{
-				$scope.mensagem = 'Não foi possivel atualizar historia '+result.mensagem;
+				$scope.mensagem = 'Não foi possivel atualizar historia! '+result.mensagem;
 			};
 		};
 		// Adiciona capitulo em branco
@@ -56,63 +56,102 @@ angular.module('storyteller')
         	});
 
     	};
-    	checkHistoria = function(historia){
-		var liberada = {
-			situacao : null,
-			mensagem : 'nao contem um capitulo final'
-		};
 
-		var arrayAcao = [];
-		var existeFinal = false;
-		var acoesCorretas = true;
-		
-		for(var i=0; i < historia.capitulos.length; i++){
-				if(historia.capitulos[i].acao.length){
-					for(var k=0; k < historia.capitulos[i].acao.length; k++){
-						var indexCap = historia.capitulos[i].acao[k].numCapitulo;
-						arrayAcao.push(indexCap);
-						//var testCap = historia.capitulos[i];
-							if(!historia.capitulos[indexCap]){
-								liberada.mensagem = "No capitulo: "+i+" A acão: "+historia.capitulos[i].acao[k].text+", leva para um capitulo inexistente";
-								acoesCorretas = false;
-								break;
-							}else if(i === indexCap){
-								liberada.mensagem = "No capitulo: "+i+" A acão: "+historia.capitulos[i].acao[k].text+", leva para seu capitulo de origem";
-								acoesCorretas = false;
-								break;
-							}else{
-								acoesCorretas = true;
-							};
-								console.log("Nao é um capitulo final: "+i)
-					};			
+    	checkCapitulos = function(historia, Capituloliberado){
+    		for(var i=0; i < historia.capitulos.length; i++){
+    			if(!historia.capitulos[i].acao.length){
+					Capituloliberado.situacao = true;
+					Capituloliberado.mensagem = "";
+					break;
 				}else{
-					console.log("Capitulo final: "+i)
-					existeFinal = true;
+					Capituloliberado.situacao = false;
+					Capituloliberado.mensagem = "Não existe um capitulo final!";
 				};
-		};
-
-		for(var i=0; i < historia.capitulos.length; i++){
-			if(i > 0 && arrayAcao.indexOf(i) < 0){
-				console.log(arrayAcao);
-				liberada.mensagem = "Não existe nenhuma acao que leve para o capitulo: "+i;
-				acoesCorretas = false;
-				//break;						
-				}else if(i > 0 && arrayAcao.indexOf(i) > 0){
-				//acoesCorretas = true;
-				console.log(arrayAcao);
-				console.log("Capitulo "+i+" tem "+arrayAcao.indexOf(i)+" ligacoes");
-				};
-		};
-			console.log("Tem final? "+existeFinal+" Acoes corretas? "+acoesCorretas)
-			if(existeFinal === true && acoesCorretas === true){
-				liberada.situacao = true;
-			}else{
-				liberada.situacao = false;
-				console.log(liberada.situacao);
+			};
+			return Capituloliberado;
+    	};
+    	checkLoop = function(historia, loopLiberado){
+    		for(var i=0; i < historia.capitulos.length; i++){
+    			if(historia.capitulos[i].acao.length){
+    				for(var k=0; k < historia.capitulos[i].acao.length; k++){
+    					var indexCap = historia.capitulos[i].acao[k].numCapitulo;
+    					var acoesPai = historia.capitulos[i].acao.length;
+						var acoesFilho = historia.capitulos[indexCap].acao.length;
+						if(acoesFilho){
+						var numCapitulo = historia.capitulos[indexCap].acao[0].numCapitulo
+						};
+						if(acoesPai === 1 && acoesFilho === 1 && numCapitulo === i){
+							loopLiberado.mensagem = "Nos capitulos: "+indexCap+" e "+i+" existe um looping";
+							loopLiberado.situacao = false;
+							console.log("azedou!");
+							break;
+						}else{
+							console.log("ok!")
+						};	
+					};
+				};		
 			};
 
-		return liberada;
+			return loopLiberado;
+    	};
+    	checkAcaos = function(historia, Acaoliberada){
+    		var arrayAcao = [];
+    		for(var i=0; i < historia.capitulos.length; i++){
+    			for(var k=0; k < historia.capitulos[i].acao.length; k++){
+					var indexCap = historia.capitulos[i].acao[k].numCapitulo;
+					arrayAcao.push(indexCap);
+					if(!historia.capitulos[indexCap]){
+						Acaoliberada.mensagem = "No capitulo: "+i+" A acão: "+historia.capitulos[i].acao[k].text+", leva para um capitulo inexistente";
+						Acaoliberada.situacao = false;
+						break;
+					}else if(i === indexCap){
+						Acaoliberada.mensagem = "No capitulo: "+i+" A acão: "+historia.capitulos[i].acao[k].text+", leva para seu capitulo de origem";
+						Acaoliberada.situacao = false;
+						break;
+					};
+				};
+			};
 
+			for(var i=0; i < historia.capitulos.length; i++){
+				if(i > 0 && arrayAcao.indexOf(i) < 0){
+					Acaoliberada.mensagem = "Não existe nenhuma acao que leve para o capitulo: "+i;
+					Acaoliberada.situacao = false;	
+					break;					
+				};
+			};
+			return Acaoliberada
+    	};
+
+    	checkHistoria = function(historia){
+		var Acaoliberada = {
+			situacao : true,
+			mensagem : ''
+		};
+		var Capituloliberado = {
+			situacao : true,
+			mensagem : ''
+		};
+		var loopLiberado = {
+			situacao : true,
+			mensagem : ''
+		};
+		var liberado = {
+			situacao : null,
+			mensagem : ''
+		};	
+		Acaoliberada = checkAcaos(historia, Acaoliberada);
+		Capituloliberado = checkCapitulos(historia, Capituloliberado);
+		if(Acaoliberada.situacao === true && Capituloliberado.situacao === true){
+		console.log("Check Looop");
+		loopLiberado = checkLoop(historia, loopLiberado);
+		};
+		if(Acaoliberada.situacao === true && Capituloliberado.situacao === true && loopLiberado.situacao === true){
+			liberado.situacao = true;
+		}else{
+			liberado.situacao = false;
+			liberado.mensagem = Acaoliberada.mensagem+" "+Capituloliberado.mensagem+" "+loopLiberado.mensagem;
+		};
+		return liberado;
 		};
 		
 	});

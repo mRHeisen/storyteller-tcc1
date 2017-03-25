@@ -32,7 +32,7 @@ angular.module('storyteller')
 		$http.post('/autenticar',
 			{login: usuarioLogin.login, senha: usuarioLogin.senha})
 			.then(function(){
-				$window.sessionStorage.login = usuarioLogin.login;
+				$window.localStorage.login = usuarioLogin.login;
 				$location.path('/');
 			}, function(error){
 				console.log(error);
@@ -43,8 +43,8 @@ angular.module('storyteller')
 		};	 
 
 		$scope.sair = function () {
-		delete $window.sessionStorage.token;	
-		delete $window.sessionStorage.login;
+		delete $window.localStorage.token;	
+		delete $window.localStorage.login;
 		};
 
 		$scope.novoUsuario = function() {

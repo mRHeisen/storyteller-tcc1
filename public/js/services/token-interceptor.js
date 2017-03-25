@@ -6,7 +6,7 @@ angular.module('storyteller')
 		interceptor.response = function(response){
 			var token = response.headers('x-access-token');
 			if(token){		
-				$window.sessionStorage.token = token;
+				$window.localStorage.token = token;
 				console.log("Armazenado token recebido no navegador");
 			}
 
@@ -16,9 +16,9 @@ angular.module('storyteller')
 		interceptor.request = function(config){
 			//config.headers recebe ele mesmo se nao existir recebe obj em branco
 			config.headers = config.headers || {};
-			if($window.sessionStorage.token){
+			if($window.localStorage.token){
 				console.log("Adicionando token no header da requisição para ser enviado ao servidor");
-				config.headers['x-access-token'] = $window.sessionStorage.token;
+				config.headers['x-access-token'] = $window.localStorage.token;
 			}
 			return config;
 		};
@@ -26,8 +26,8 @@ angular.module('storyteller')
 		interceptor.responseError = function(rejection){
 			//Se receber 401 sera redirecionando
 			if(rejection != null && rejection.status == 401){
-				delete $window.sessionStorage.token;
-				delete $window.sessionStorage.login;
+				delete $window.localStorage.token;
+				delete $window.localStorage.login;
 				$location.path('/cadastro');
 			}
 			return $q.reject(rejection);

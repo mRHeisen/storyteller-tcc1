@@ -3,7 +3,7 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 	$scope.historias = [];
 	$scope.mensagem = '';
 
-	recursoHistorias.query({login: $window.sessionStorage.login}, function(historias) {
+	recursoHistorias.query({login: $window.localStorage.login}, function(historias) {
 		$scope.historias = historias;
 	}, function(erro) {
 		console.log(erro);

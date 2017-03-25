@@ -17,13 +17,8 @@
 		<a href="/#/lista" class="btn btn-primary">Voltar</a>
 		<hr>
 		<div>
-			<h2>Avalie essa História:</h2><br>
-  		<input type="radio" ng-model="nota" value="0"> 0
-  		<input type="radio" ng-model="nota" value="1"> 1
-  		<input type="radio" ng-model="nota" value="2"> 2
-  		<input type="radio" ng-model="nota" value="3"> 3
-  		<input type="radio" ng-model="nota" value="4"> 4
-  		<input type="radio" ng-model="nota" value="5"> 5 <br>
+			<h2>Avalie essa História:</h2>
+		<h1 uib-rating ng-model="nota" max="5" read-only="false"></h1>
 		<button  class="btn btn-primary" ng-click="avaliar(nota)" ng-disabled="formulario.$invalid">
 			Enviar
 		</button>

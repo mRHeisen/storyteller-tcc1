@@ -10,8 +10,7 @@ angular.module('storyteller')
 					$scope.historia.capitulos = historia.capitulos[0];
 				}else{
 					$location.path('/erro');
-			};
-
+				};
 			}, function(erro) {
 				console.log(erro);
 				$scope.mensagem = 'Não foi possível obter historia'
