@@ -71,29 +71,87 @@ angular.module('storyteller')
 			return Capituloliberado;
     	};
     	checkLoop = function(historia, loopLiberado){
+    		var lista = new Array();
     		for(var i=0; i < historia.capitulos.length; i++){
+    			lista.push({capitulo : {numero : i, filhos : []}});
     			if(historia.capitulos[i].acao.length){
-    				for(var k=0; k < historia.capitulos[i].acao.length; k++){
+    				for(var k=0; k < historia.capitulos[i].acao.length; k++){	
     					var indexCap = historia.capitulos[i].acao[k].numCapitulo;
-    					var acoesPai = historia.capitulos[i].acao.length;
-						var acoesFilho = historia.capitulos[indexCap].acao.length;
-						if(acoesFilho){
-						var numCapitulo = historia.capitulos[indexCap].acao[0].numCapitulo
-						};
-						if(acoesPai === 1 && acoesFilho === 1 && numCapitulo === i){
-							loopLiberado.mensagem = "Nos capitulos: "+indexCap+" e "+i+" existe um looping";
-							loopLiberado.situacao = false;
-							console.log("azedou!");
-							break;
-						}else{
-							console.log("ok!")
-						};	
-					};
+    				lista[i].capitulo.filhos.push(indexCap);
+    					
+					};			
 				};		
 			};
-
+			var aux
+    		var numero = 0;
+    		var fila = new Array();
+    		var retirados = new Array();
+    		var repetidos = new Array();
+    		fila[fila.length] = numero;
+    		do{ 			
+    			if(lista[numero].capitulo.filhos.length){
+    				for(var k=0; k < lista[numero].capitulo.filhos.length; k++){
+    				if(repetidos.indexOf(lista[numero].capitulo.filhos[k]) < 0 && fila.indexOf(lista[numero].capitulo.filhos[k]) < 0){
+    					fila[fila.length] = lista[numero].capitulo.filhos[k];
+    				};		
+    				};
+    				aux = retirados.indexOf(numero);
+    				if(aux < 0){ 				
+    					retirados.push(fila[0]);
+    					fila.splice(0,1);
+    					numero = fila[0];   					
+    				}else if(aux >= 0 && repetidos.indexOf(numero) < 0){
+    					if(lista[numero].capitulo.filhos){
+    					repetidos.push(fila[0]);
+    					};
+    					fila.splice(0,1);
+    					numero = fila[0];	
+    				};			
+    			}else{
+    				if(aux < 0){
+    					retirados.push(fila[0]);
+    					fila.splice(0,1);
+    					numero = fila[0];	
+    				}else if(aux >= 0 && repetidos.indexOf(numero) < 0){
+    					fila.splice(0,1);
+    					numero = fila[0];	
+    				};
+    			};
+    		}while(fila.length);
+			var saida = checkRepetidos(repetidos, lista);
+			if(saida === true){
+				loopLiberado.situacao = true;
+				loopLiberado.mensagem = '';
+			}else{
+				loopLiberado.situacao = false;
+				loopLiberado.mensagem = 'loop sem saida nos capitulos: '+repetidos;
+			};
 			return loopLiberado;
     	};
+    	checkRepetidos = function(repetidos, lista){
+    		var loop = new Array();
+    		var saida = false;
+    		console.log("Repetidos: "+repetidos);
+    		numero = repetidos[0];
+    		for(var i=0; i < repetidos.length; i++){
+    			numero = repetidos[i];
+    			for(var k=0; k < lista[numero].capitulo.filhos.length; k++){
+    				var aux = repetidos.indexOf(lista[numero].capitulo.filhos[k]);
+					console.log("Capitulo: "+lista[numero].capitulo.numero);
+    				if(aux >= 0){
+	    				console.log("Sem saida");			
+	    				//repetidos.splice(0,1);	    				
+    				}else if(aux < 0){
+    					console.log("Saida");
+    					//repetidos.splice(0,1);
+    					saida = true
+    				};
+
+    			};  			
+    		};
+			return saida;
+    	};
+
     	checkAcaos = function(historia, Acaoliberada){
     		var arrayAcao = [];
     		for(var i=0; i < historia.capitulos.length; i++){
@@ -107,11 +165,11 @@ angular.module('storyteller')
 					}else if(i === indexCap){
 						Acaoliberada.mensagem = "No capitulo: "+i+" A acão: "+historia.capitulos[i].acao[k].text+", leva para seu capitulo de origem";
 						Acaoliberada.situacao = false;
-						break;
+						break;				
 					};
+					
 				};
 			};
-
 			for(var i=0; i < historia.capitulos.length; i++){
 				if(i > 0 && arrayAcao.indexOf(i) < 0){
 					Acaoliberada.mensagem = "Não existe nenhuma acao que leve para o capitulo: "+i;
@@ -143,7 +201,7 @@ angular.module('storyteller')
 		Capituloliberado = checkCapitulos(historia, Capituloliberado);
 		if(Acaoliberada.situacao === true && Capituloliberado.situacao === true){
 		console.log("Check Looop");
-		loopLiberado = checkLoop(historia, loopLiberado);
+		checkLoop(historia, loopLiberado);
 		};
 		if(Acaoliberada.situacao === true && Capituloliberado.situacao === true && loopLiberado.situacao === true){
 			liberado.situacao = true;
