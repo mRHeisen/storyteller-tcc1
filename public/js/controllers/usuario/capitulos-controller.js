@@ -118,7 +118,7 @@ angular.module('storyteller')
     				};
     			};
     		}while(fila.length);
-			var saida = checkRepetidos(repetidos, lista);
+    		var saida = checkRepetidos(repetidos, lista);
 			if(saida === true){
 				loopLiberado.situacao = true;
 				loopLiberado.mensagem = '';
@@ -133,6 +133,8 @@ angular.module('storyteller')
     		var saida = false;
     		console.log("Repetidos: "+repetidos);
     		numero = repetidos[0];
+    		if(repetidos.length){
+    			console.log("Tem repetidos");
     		for(var i=0; i < repetidos.length; i++){
     			numero = repetidos[i];
     			for(var k=0; k < lista[numero].capitulo.filhos.length; k++){
@@ -149,6 +151,10 @@ angular.module('storyteller')
 
     			};  			
     		};
+    	}else{
+    		console.log("nao tem repetidos");
+    		saida = true
+    	};
 			return saida;
     	};
 
