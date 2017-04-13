@@ -88,7 +88,8 @@ angular.module('storyteller')
     		var retirados = new Array();
     		var repetidos = new Array();
     		fila[fila.length] = numero;
-    		do{ 			
+    		do{ 	
+    			console.log("Fila: "+fila); 		
     			if(lista[numero].capitulo.filhos.length){
     				for(var k=0; k < lista[numero].capitulo.filhos.length; k++){
     				if(repetidos.indexOf(lista[numero].capitulo.filhos[k]) < 0 && fila.indexOf(lista[numero].capitulo.filhos[k]) < 0){
@@ -99,7 +100,7 @@ angular.module('storyteller')
     				if(aux < 0){ 				
     					retirados.push(fila[0]);
     					fila.splice(0,1);
-    					numero = fila[0];   					
+    					numero = fila[0];					
     				}else if(aux >= 0 && repetidos.indexOf(numero) < 0){
     					if(lista[numero].capitulo.filhos){
     					repetidos.push(fila[0]);

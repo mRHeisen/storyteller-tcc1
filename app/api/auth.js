@@ -49,7 +49,7 @@ api.verificaToken = function(req,res, next){
 		req.usuario = decoded;
 		// libera as proximos midlware
 		next();
-	});
+		});
 	}else{
 		console.log('Token não foi enviado');
 		res.sendStatus(401);

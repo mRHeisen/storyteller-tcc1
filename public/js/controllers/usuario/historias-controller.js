@@ -3,11 +3,13 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 	$scope.historias = [];
 	$scope.mensagem = '';
 
-	recursoHistorias.query({login: $window.localStorage.login}, function(historias) {
+		$http.get('/v1/minhas/historias',{params:{login: $window.localStorage.login}})
+		.success(function(historias) {
 		$scope.historias = historias;
-	}, function(erro) {
-		console.log(erro);
-	});
+		})
+		.error(function(erro) {
+			console.log(erro);
+		});
 	
 	enviaHistoria = function(historia){
 		if(historia.disponivel === true){

@@ -9,49 +9,8 @@ var api = {};
 var model = mongoose.model('Historia');
 
 //Retorna uma lista de historias
-api.lista = function(req, res){
-	
-	if(req.query.login){
-		model
-		.find({autor: req.query.login})
-		.then(function(historias){
-			//Manda a lista de historias se não houver erro em json
-			res.json(historias);
-		}, function(error){
-			//Mostra o erro no console
-			console.log(error);
-			//Manda o status 500 na requisição e o erro em json
-			res.status(500).json(error);
-		});
-	};
+api.lista = function(req, res){	
 	//Find passa um obect vazil e usa promess para obter resultado
-	if(req.query.ranque){
-		model
-		.find({disponivel:true}).sort({pontuacao: -1}).limit(10)
-		.then(function(historias){
-			//Manda a lista de historias se não houver erro em json
-			res.json(historias);
-		}, function(error){
-			//Mostra o erro no console
-			console.log(error);
-			//Manda o status 500 na requisição e o erro em json
-			res.status(500).json(error);
-		});
-	};
-	if(req.query.genero){
-		model
-		.find({genero: req.query.genero, disponivel:true})
-		.then(function(historias){
-			//Manda a lista de historias se não houver erro em json
-			res.json(historias);
-		}, function(error){
-			//Mostra o erro no console
-			console.log(error);
-			//Manda o status 500 na requisição e o erro em json
-			res.status(500).json(error);
-		});
-	};
-	if(!req.query.genero && !req.query.ranque){
 		model
 		.find({disponivel:true})
 		.then(function(historias){
@@ -62,10 +21,36 @@ api.lista = function(req, res){
 			console.log(error);
 			//Manda o status 500 na requisição e o erro em json
 			res.status(500).json(error);
-		});
-	};
-	
+		});	
 
+};
+api.milhaLista = function(req, res){
+	var autor = req.query.login;
+	model
+		.find({autor: autor})
+		.then(function(historias){
+			//Manda a lista de historias se não houver erro em json
+			res.json(historias);
+		}, function(error){
+			//Mostra o erro no console
+			console.log(error);
+			//Manda o status 500 na requisição e o erro em json
+			res.status(500).json(error);
+		});
+};
+api.genero = function(req, res){
+	var genero = req.query.genero;
+		model
+		.find({genero: genero, disponivel:true})
+		.then(function(historias){
+			//Manda a lista de historias se não houver erro em json
+			res.json(historias);
+		}, function(error){
+			//Mostra o erro no console
+			console.log(error);
+			//Manda o status 500 na requisição e o erro em json
+			res.status(500).json(error);
+		});
 };
 //Busca historia pelo id
 api.buscaPorId = function(req, res){

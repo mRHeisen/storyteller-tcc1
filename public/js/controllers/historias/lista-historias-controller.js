@@ -7,29 +7,36 @@ angular.module('storyteller').controller('ListaHistoriaController', function($sc
 	$http.get('/v1/generos')
 			.success(function(generos) {
 			$scope.geneross = generos;
-		});
-
-
-	recursoHistorias.query(function(historias) {
-		$scope.historias = historias;
-	}, function(erro) {
+		})
+		.error(function(erro) {
+		console.log(erro);
+	});
+				
+	$http.get('/v1/historias')
+	.success(function(historias) {
+	$scope.historias = historias;
+	})
+	.error(function(erro) {
 		console.log(erro);
 	});
 
-
 	$scope.generos = function(genero) {
 		if(genero){
-		recursoHistorias.query({genero: genero}, function(historias) {
+		$http.get('/v1/genero/historias',{params:{genero: genero}})
+		.success(function(historias) {
 		$scope.historias = historias;
-		}, function(erro) {
-		console.log(erro);
+		})
+		.error(function(erro) {
+			console.log(erro);
 		});
 		}else{
-		recursoHistorias.query(function(historias) {
+		$http.get('/v1/historias')
+		.success(function(historias) {
 		$scope.historias = historias;
-		}, function(erro) {
-		console.log(erro);
+		})
+		.error(function(erro) {
+			console.log(erro);
 		});
-	};
+		};
 };
 });

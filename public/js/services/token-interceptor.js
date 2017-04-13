@@ -26,9 +26,9 @@ angular.module('storyteller')
 		interceptor.responseError = function(rejection){
 			//Se receber 401 sera redirecionando
 			if(rejection != null && rejection.status == 401){
-				delete $window.localStorage.token;
-				delete $window.localStorage.login;
 				$location.path('/cadastro');
+				delete $window.localStorage.token;
+				delete $window.localStorage.login;			
 			}
 			return $q.reject(rejection);
 		};

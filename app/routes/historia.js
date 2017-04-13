@@ -4,7 +4,7 @@ module.exports = function(app){
     //Define o indentificador da rota em um unico lugar
      app.route('/v1/historias')
         .get(api.lista) //Buscar recurso com get / espera get e uma funcção
-        .post(api.adiciona)
+        .post(api.adiciona);
 
     //Define o indentificador da rota em um unico lugar
      app.route('/v1/historias/:id')
@@ -13,4 +13,9 @@ module.exports = function(app){
       .put(api.atualiza) //Atuliza historias pelo id
       .patch(api.pontuacao); //Atualiza puntuacao
      
+     app.route('/v1/minhas/historias')
+      .get(api.milhaLista); //Buscar recurso com get / espera get e uma funcção
+
+     app.route('/v1/genero/historias')
+      .get(api.genero); //Buscar recurso com get / espera get e uma funcção
 };
