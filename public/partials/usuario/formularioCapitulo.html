@@ -2,7 +2,6 @@
 	<h1 >{{historia.titulo}}</h1>
 	<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
 </div>
-
 <form novalidate name="formulario" class="row">
 	<div>
 		<button class="btn btn-primary" ng-click="newCap()">Novo Capítulo</button>
@@ -14,19 +13,22 @@
 	</div>
 <div class="panel painel-cap painel-animado col-xs-12 col-sm-3" ng-repeat="capitulo in historia.capitulos" style="background-color:#e6e6e6;">
 	<div class="panel-heading">
-		<label class="col-sm-6 col-xs-6">
-			Capítulo: {{$index}}
-		</label>
-		<button type="button" class="btn btn-default btn-lg col-sm-3 btn-right" ng-click="removeCap(capitulo)">
-  				<span class="glyphicon glyphicon-trash"></span>
-		</button>
-				
+		<label class="col-sm-12 col-xs-12">
+			<h2>Capítulo: {{$index}}</h2>
+		</label>				
     	<div>
-    	<label class="col-sm-12 col-xs-12">Texto:</label>
-			<textarea spellcheck="true" rows="10" name="textCapitulo" class="form-control" ng-model="capitulo.texto" required></textarea>
-			<label class="col-sm-12">Ações:</label>
-			<button type="button" class="btn btn-default btn-lg col-sm-12" ng-click="open(capitulo)">
+    		<br></br>
+			<button type="button" class="btn btn-default btn-lg col-sm-12 col-xs-5" ng-click="openCap(capitulo)">
+				Texto:
   				<span class="glyphicon glyphicon-list-alt"></span>
+			</button>
+			<br></br>
+			<button type="button" class="btn btn-default btn-lg col-sm-12 col-xs-5" ng-click="open(capitulo)">
+				Ações:
+  				<span class="glyphicon glyphicon-list-alt"></span>
+			</button>
+			<button type="button" class="btn btn-default btn-lg col-sm-12 col-xs-2" ng-click="removeCap(capitulo)">
+  				<span class="glyphicon glyphicon-trash"></span>
 			</button>
 			<script type="text/ng-template" id="myModal.html">
     		<form novalidate name="formulario" class="row">	
@@ -49,6 +51,17 @@
 					        <button class="btn btn-default col-sm-3" ng-click="newLink(capitulo)">Nova Ação</button>
 					        <button class="btn btn-default" ng-click="close()" ng-disabled="formulario.$invalid">Salvar</button >
 				        </div>
+				      </div>
+			</form>
+  			</script>
+  			<script type="text/ng-template" id="myModalCap.html">
+    		<form novalidate name="formulario" class="row">	
+    			<div class="modal-content">
+				        <div class="modal-header">
+				          <textarea ckeditor="editorOptions" spellcheck="true" rows="10" name="textCapitulo" class="form-control" ng-model="capitulo.texto" required></textarea>
+				      </div>
+				      <div class="modal-footer">
+				      <button class="btn btn-default" ng-click="close()" ng-disabled="formulario.$invalid">Salvar</button >
 				      </div>
 			</form>
   			</script>

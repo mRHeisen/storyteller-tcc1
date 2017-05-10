@@ -3,7 +3,24 @@ angular.module('storyteller')
 	
 	$scope.capitulo = capitulo;
 
-	   	$scope.newLink = function(capitulo) {
+   $scope.editorOptions = {
+      language: 'pt-br',
+      'skin': 'moono',
+      toolbar: 'full',
+      removeButtons : 'Source',
+      toolbar_full: [
+      { name: 'clipboard', items : [ 'Source','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+      { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
+      '/',
+      { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
+      { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote',
+      '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock', 'Image'] },
+      '/',
+      { name: 'styles', items : [ 'Format','Font','FontSize' ] },
+      ]   
+      };
+	   	
+         $scope.newLink = function(capitulo) {
    		ac = {num: 0, text: ""};
    		capitulo.acao.push(ac);
    		};

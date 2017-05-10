@@ -61,7 +61,6 @@ angular.module('meusServicos', ['ngResource'])
 		var service = {};
 		service.cadastrar = function(historia) {
 			return $q(function(resolve, reject) {
-
 				if(historia._id) {
 					recursoHistorias.update({historiaId: historia._id}, historia, function() {
 						resolve({

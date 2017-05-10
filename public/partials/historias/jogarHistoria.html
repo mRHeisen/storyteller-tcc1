@@ -6,12 +6,11 @@
 		<hr>
 	</div>
 </div>
-<div class="container">
-  <div class="row row-centered">
-    <div class="col-centered panel painel-cap col-xs-12 col-sm-6" style="background-color:#e6e6e6;">
-			<div class="panel-heading">
+<div align="center">
+    <div class="col-centered panel painel-cap col-xs-12 col-sm-6 " style="background-color:#e6e6e6;">
+			<div class="panel-heading" align="left">
 		    		<p>
-		    			{{historia.capitulos.texto}}
+		    			<p ckeditor="editorOptions" ng-model="historia.capitulos.texto"></p>
 		    		</p>
 
 						<div ng-repeat="acao in historia.capitulos.acao">
@@ -20,5 +19,7 @@
 			</div>
 
     </div>
-  </div>
 </div>
+
+
+

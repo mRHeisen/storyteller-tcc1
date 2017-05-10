@@ -2,7 +2,9 @@ angular.module('storyteller')
 	.controller('CapitulosController', function($scope, recursoHistorias, $window, $location, $routeParams, $rootScope, $uibModal, cadastroDeHistorias) {
 		$scope.historia = {};
 		$scope.mensagem = '';
-		
+
+
+
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
 				if(historia.autor == $window.localStorage.login){
@@ -47,6 +49,19 @@ angular.module('storyteller')
         	$rootScope.modalInstance = $uibModal.open({
        	 	controller: "ModalController",
         	templateUrl: 'myModal.html',
+        	resolve: {
+          		capitulo: function()
+           			{
+              		return cap;
+           			}
+         		}
+        	});
+
+    	};
+    	$scope.openCap = function (cap) {
+        	$rootScope.modalInstance = $uibModal.open({
+       	 	controller: "ModalController",
+        	templateUrl: 'myModalCap.html',
         	resolve: {
           		capitulo: function()
            			{
@@ -218,5 +233,5 @@ angular.module('storyteller')
 		};
 		return liberado;
 		};
-		
+
 	});

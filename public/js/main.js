@@ -1,4 +1,4 @@
-angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos', 'ui.bootstrap', 'ngSanitize'])
+angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngResource', 'meusServicos', 'ui.bootstrap', 'ngSanitize', 'ngCkeditor'])
 	.config(function($routeProvider, $locationProvider, $httpProvider) {
 
 		$httpProvider.interceptors.push('tokenInterceptor');

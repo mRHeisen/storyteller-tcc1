@@ -107,8 +107,10 @@ api.adiciona = function(req, res){
 api.atualiza = function(req, res){
 	//Usa funçao do mongoose (findByIdAndUpdate) para procura pelo id que for passa e atulizar o mesmo documento no
 	//MongoDB
+	historia = req.body;
+	console.log(historia);
 	model
-		.findByIdAndUpdate(req.params.id, req.body)
+		.findByIdAndUpdate(req.params.id, historia)
 		.then(function(historia){ 
 			//Manda a historia atualizada
 			res.json(historia);
