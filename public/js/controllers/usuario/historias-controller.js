@@ -36,7 +36,8 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 
 
 	$scope.remover = function(historia) {
-
+		var confirmacao = confirm("Excluir a História: "+historia.titulo);
+		if(confirmacao === true){
 		recursoHistorias.delete({historiaId: historia._id}, function() {
 			var indiceDaHistoria = $scope.historias.indexOf(historia);
 			$scope.historias.splice(indiceDaHistoria, 1);
@@ -45,6 +46,7 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 			console.log(erro);
 			$scope.mensagem = 'Não foi possível apagar a historia ' + historia.titulo;
 		});
+		};
 	};
 
 });

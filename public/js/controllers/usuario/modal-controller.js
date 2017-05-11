@@ -7,7 +7,6 @@ angular.module('storyteller')
       language: 'pt-br',
       'skin': 'moono',
       toolbar: 'full',
-      removeButtons : 'Source',
       toolbar_full: [
       { name: 'clipboard', items : [ 'Source','Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
       { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },

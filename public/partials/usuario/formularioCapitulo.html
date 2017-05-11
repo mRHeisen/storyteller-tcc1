@@ -1,6 +1,9 @@
+<div ng-include="'/partials/menu.html'"></div>
+<div class="container">
 <div class="page-header text-center text-transform: uppercase">
 	<h1 >{{historia.titulo}}</h1>
 	<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+	<p ng-show="mensagemErro.length" class="alert alert-danger">{{mensagemErro}}</p>
 </div>
 <form novalidate name="formulario" class="row">
 	<div>
@@ -18,16 +21,17 @@
 		</label>				
     	<div>
     		<br></br>
-			<button type="button" class="btn btn-default btn-lg col-sm-12 col-xs-5" ng-click="openCap(capitulo)">
-				Texto:
+			<button type="button" class="btn btn-default btn-lg btn-block col-sm-12 col-xs-4" ng-click="openCap(capitulo)">
+				Texto
   				<span class="glyphicon glyphicon-list-alt"></span>
 			</button>
 			<br></br>
-			<button type="button" class="btn btn-default btn-lg col-sm-12 col-xs-5" ng-click="open(capitulo)">
-				Ações:
+			<button type="button" class="btn btn-default btn-lg btn-block col-sm-12 col-xs-4" ng-click="open(capitulo)">
+				Ações
   				<span class="glyphicon glyphicon-list-alt"></span>
 			</button>
-			<button type="button" class="btn btn-default btn-lg col-sm-12 col-xs-2" ng-click="removeCap(capitulo)">
+			<button type="btn" class="btn btn-danger btn-block col-sm-12 col-xs-4" ng-click="removeCap(capitulo)">
+				Excluir
   				<span class="glyphicon glyphicon-trash"></span>
 			</button>
 			<script type="text/ng-template" id="myModal.html">
@@ -49,7 +53,7 @@
 				        </div>
 				        <div class="modal-footer">
 					        <button class="btn btn-default col-sm-3" ng-click="newLink(capitulo)">Nova Ação</button>
-					        <button class="btn btn-default" ng-click="close()" ng-disabled="formulario.$invalid">Salvar</button >
+					        <button class="btn btn-default" ng-click="close()">Voltar</button >
 				        </div>
 				      </div>
 			</form>
@@ -61,7 +65,7 @@
 				          <textarea ckeditor="editorOptions" spellcheck="true" rows="10" name="textCapitulo" class="form-control" ng-model="capitulo.texto" required></textarea>
 				      </div>
 				      <div class="modal-footer">
-				      <button class="btn btn-default" ng-click="close()" ng-disabled="formulario.$invalid">Salvar</button >
+				      <button class="btn btn-default" ng-click="close()">Voltar</button >
 				      </div>
 			</form>
   			</script>
@@ -69,3 +73,4 @@
 	</div>
 </div>
 </form>
+</div>
