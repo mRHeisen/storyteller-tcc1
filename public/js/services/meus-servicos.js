@@ -12,7 +12,7 @@ angular.module('meusServicos', ['ngResource'])
 	})
 	.factory('recursoUsuario', function($resource) {
 
-		return $resource('/v1/usuario/:historiaId', null, {
+		return $resource('/v1/usuario/:usuarioId', null, {
 			'update' : { 
 				method: 'PUT'
 			},
@@ -27,6 +27,7 @@ angular.module('meusServicos', ['ngResource'])
 			return $q(function(resolve, reject) {
 
 				if(usuario._id) {
+					console.log("sasa");
 					recursoUsuario.update({usuarioId: usuario._id}, usuario, function() {
 						resolve({
 							mensagem: 'Usuario ' + usuario.login + ' atualizada com sucesso',
@@ -61,6 +62,7 @@ angular.module('meusServicos', ['ngResource'])
 		var service = {};
 		service.cadastrar = function(historia) {
 			return $q(function(resolve, reject) {
+
 				if(historia._id) {
 					recursoHistorias.update({historiaId: historia._id}, historia, function() {
 						resolve({

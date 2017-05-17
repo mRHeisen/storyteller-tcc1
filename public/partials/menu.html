@@ -15,7 +15,9 @@
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
 		      <li><a ng-if="usuarioLogin" href="#/cadastro"><span class="glyphicon glyphicon-user"></span> Log-in</a></li>
+		      <li><a required ng-controller="CadastroUsuarioController" ng-if="!usuarioLogin" ng-click="usuarioConfig(usuarioId)" href="/#/usuario/edit/{{usuarioId}}"><span class="glyphicon glyphicon-user"></span> Usuario</a></li>
 		      <li><a required ng-controller="CadastroUsuarioController" ng-if="!usuarioLogin" ng-click="sair()"href="/#/cadastro"><span class="glyphicon glyphicon-log-in"></span> Sair</a></li>
+
 		    </ul>
 		</div>
 	</div>

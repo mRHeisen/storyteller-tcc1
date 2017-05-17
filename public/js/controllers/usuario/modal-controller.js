@@ -1,8 +1,12 @@
 angular.module('storyteller')
 	.controller('ModalController', function($scope, $rootScope, capitulo) {
-	
+	    $scope.valores = [
+      {name:'1-5'},
+      {name:'6-10'},
+      {name:'11-15'},
+      {name:'16-20'}
+    ];
 	$scope.capitulo = capitulo;
-
    $scope.editorOptions = {
       language: 'pt-br',
       'skin': 'moono',

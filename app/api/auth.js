@@ -24,6 +24,7 @@ api.autentica = function(req,res){
 			});
             console.log('Autenticado: token adicionado na resposta');
             res.set('x-access-token', token); // adicionando token no cabeçalho de resposta
+            res.json(usuario._id);
             res.end(); // enviando a resposta
              }
 

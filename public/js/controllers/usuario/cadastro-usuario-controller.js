@@ -5,6 +5,7 @@ angular.module('storyteller')
 		 $scope.usuarioLogin = {};
 		 $scope.mensagem = '';
 		 $scope.showMe = false;
+		 $scope.usuarioId = $window.localStorage.userID;
 
         $scope.submeter = function(login) {
 
@@ -31,8 +32,10 @@ angular.module('storyteller')
 		$scope.autenticar = function (usuarioLogin) {
 		$http.post('/autenticar',
 			{login: usuarioLogin.login, senha: usuarioLogin.senha})
-			.then(function(){
+			.then(function(data){
+				console.log($scope.usuarioId);
 				$window.localStorage.login = usuarioLogin.login;
+				$window.localStorage.userID = data.data;
 				$location.path('/');
 			}, function(error){
 				console.log(error);
@@ -42,9 +45,14 @@ angular.module('storyteller')
 
 		};	 
 
+		$scope.usuarioConfig = function () {
+			console.log($scope.usuarioId);
+		};
+
 		$scope.sair = function () {
 		delete $window.localStorage.token;	
 		delete $window.localStorage.login;
+		delete $window.localStorage.userID;
 		};
 
 		$scope.novoUsuario = function() {

@@ -13,6 +13,11 @@ angular.module('storyteller', ['minhasDiretivas','ngAnimate', 'ngRoute', 'ngReso
 			controller: 'HomeController'
 		});
 
+		$routeProvider.when('/usuario/edit/:usuarioId', {
+			templateUrl: 'partials/usuario/usuario.html',
+			controller: 'UsuarioController'
+		});
+
 		$routeProvider.when('/erro', {
 			templateUrl: 'partials/erro404.html',
 			controller: 'HomeController'

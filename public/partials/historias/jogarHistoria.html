@@ -8,14 +8,11 @@
 		<hr>
 	</div>
 <div align="center">
-    <div class="col-centered panel painel-cap col-xs-12 col-sm-6 " style="background-color:#e6e6e6;">
+    <div class="col-centered panel painel-cap col-xs-12 col-sm-12 col-md-6" style="background-color:#e6e6e6;">
 			<div class="panel-heading" align="left">
-		    		<p>
 		    			<p ckeditor="editorOptions" ng-model="historia.capitulos.texto"></p>
-		    		</p>
-
 						<div ng-repeat="acao in historia.capitulos.acao">
-						    <button class="col-xs-12" ng-click="capitulo(acao.numCapitulo)">{{acao.text}}</button>
+						    <button class="col-xs-12 col-sm-12 col-md-6" ng-click="capitulo(acao.numCapitulo)">{{acao.text}}</button>
 					    </div>
 			</div>
 

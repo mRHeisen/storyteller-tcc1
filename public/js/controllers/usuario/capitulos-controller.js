@@ -1,11 +1,10 @@
 angular.module('storyteller')
 	.controller('CapitulosController', function($scope, recursoHistorias, $window, $location, $routeParams, $rootScope, $uibModal, cadastroDeHistorias) {
 		$scope.historia = {};
+    $scope.valor = '';
 		$scope.mensagem = '';
     $scope.mensagemErro = '';
-
-
-
+    
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
 				if(historia.autor == $window.localStorage.login){
@@ -78,7 +77,9 @@ angular.module('storyteller')
         	});
 
     	};
-
+      checkDado = function(){
+        console.log("Ronaldo");
+      };
     	checkCapitulos = function(historia, Capituloliberado){
     		for(var i=0; i < historia.capitulos.length; i++){
     			if(!historia.capitulos[i].acao.length){
