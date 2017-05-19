@@ -4,6 +4,9 @@ angular.module('storyteller')
     $scope.valor = '';
 		$scope.mensagem = '';
     $scope.mensagemErro = '';
+    $scope.escolha = 'Escolha';
+    $scope.dados = 'Dados';
+    $scope.final = 'Final';
     
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
@@ -18,6 +21,7 @@ angular.module('storyteller')
 			});
 		}
 		$scope.submeter = function() {
+      console.log($scope.historia);
 			var result = checkHistoria($scope.historia)
 			if ($scope.formulario.$valid && result.situacao === true) {
 				cadastroDeHistorias.cadastrar($scope.historia)
@@ -35,6 +39,12 @@ angular.module('storyteller')
 			};
 		};
 		// Adiciona capitulo em branco
+      $scope.tipoDoCap = function(capitulo) {  
+      if(capitulo.tipo == "final"){
+        capitulo.acao.splice(0);
+        console.log(capitulo.acao);
+      };
+      };
    		$scope.newCap = function() {
    		var indiceDoCap = $scope.historia.capitulos.length
    		var capitulo = {texto : null, acao : []};
@@ -62,7 +72,6 @@ angular.module('storyteller')
            			}
          		}
         	});
-
     	};
     	$scope.openCap = function (cap) {
         	$rootScope.modalInstance = $uibModal.open({
@@ -75,23 +84,49 @@ angular.module('storyteller')
            			}
          		}
         	});
-
     	};
-      checkDado = function(){
-        console.log("Ronaldo");
+      $scope.validarDados = function (cap) {
+        var total = (cap.acao.valor1)+(cap.acao.valor2);
+        console.log(total);
+
       };
     	checkCapitulos = function(historia, Capituloliberado){
-    		for(var i=0; i < historia.capitulos.length; i++){
-    			if(!historia.capitulos[i].acao.length){
-					Capituloliberado.situacao = true;
-					Capituloliberado.mensagem = "";
-					break;
-				}else{
-					Capituloliberado.situacao = false;
-					Capituloliberado.mensagem = "Não existe um capitulo final!";
-				};
-			};
-			return Capituloliberado;
+        for(var i=0; i < historia.capitulos.length; i++){
+          if(historia.capitulos[i].tipo == ""){
+              Capituloliberado.situacao = false;
+              Capituloliberado.mensagem = "O capitulo "+i+" não contem um tipo.";
+              break;
+          }else{
+              Capituloliberado.situacao = true;
+              Capituloliberado.mensagem = "";
+          };
+        };
+        if(Capituloliberado.situacao === true){
+    		  for(var i=0; i < historia.capitulos.length; i++){
+    		   if(historia.capitulos[i].tipo == "final"){
+					    Capituloliberado.situacao = true;
+					    Capituloliberado.mensagem = "";
+					    break;
+           }else{
+					    Capituloliberado.situacao = false;
+				  	  Capituloliberado.mensagem = "Não existe um capitulo final!";
+            };
+			    };
+        };
+        if(Capituloliberado.situacao === true){
+          for(var i=0; i < historia.capitulos.length; i++){
+            console.log("Texto do cap "+i+" : "+historia.capitulos[i].texto);
+            if(historia.capitulos[i].texto == null){
+              Capituloliberado.situacao = false;
+              Capituloliberado.mensagem = "O capitulo "+i+" não contem texto.";
+              break;
+            }else{
+              Capituloliberado.situacao = true;
+              Capituloliberado.mensagem = "";
+            };
+          };
+        };
+			   return Capituloliberado;
     	};
     	checkLoop = function(historia, loopLiberado){
     		var lista = new Array();

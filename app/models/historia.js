@@ -38,11 +38,14 @@ var schema = mongoose.Schema(
 	},
 	capitulos : [
     {
+    	tipo : String,
         texto : String,
         acao : [
         {
         	numCapitulo : Number,
-        	text : String
+        	text : String,
+        	valor1 : Number,
+        	valor2 : Number
         }
         ]
     }

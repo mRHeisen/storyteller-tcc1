@@ -18,15 +18,21 @@
 	<div class="panel-heading">
 		<label class="col-sm-12 col-xs-12">
 			<h2>Capítulo: {{$index}}</h2>
+			<select name="tipo" ng-click="tipoDoCap(capitulo)" ng-model="capitulo.tipo" class="form-control">
+				<option value="">Tipo?</option>
+				<option value="escolha">Escolhas</option>
+				<option value="dados">Dados</option>
+				<option value="final">Final</option>
+			</select>
 		</label>				
     	<div>
     		<br></br>
-			<button type="button" class="btn btn-default btn-lg btn-block col-sm-12 col-xs-4" ng-click="openCap(capitulo)">
+			<button type="button" class="btn btn-default btn-lg btn-block col-sm-12 col-xs-4" ng-disabled="capitulo.tipo == undefined || capitulo.tipo == ''" ng-click="openCap(capitulo)">
 				Texto
   				<span class="glyphicon glyphicon-list-alt"></span>
 			</button>
 			<br></br>
-			<button type="button" class="btn btn-default btn-lg btn-block col-sm-12 col-xs-4" ng-click="open(capitulo)">
+			<button type="button" class="btn btn-default btn-lg btn-block col-sm-12 col-xs-4" ng-disabled="capitulo.tipo == undefined || capitulo.tipo == 'final' || capitulo.tipo == ''" ng-click="open(capitulo)">
 				Ações
   				<span class="glyphicon glyphicon-list-alt"></span>
 			</button>
@@ -35,26 +41,53 @@
   				<span class="glyphicon glyphicon-trash"></span>
 			</button>
 			<script type="text/ng-template" id="myModal.html">
-    		<form novalidate name="formulario" class="row">	
+    		<form novalidate name="formulario" class="row" ng-if="tipo == 'escolha'">	
     			<div class="modal-content">
 				        <div class="modal-header">
-
-				          <h4 class="modal-title">Ações do Capítulo {{capitulo.numero}}</h4>
+				          <h4 class="modal-title">Ações do Capítulo de {{tipo}}</h4>
 				        </div>
 				        <div class="modal-body">
 							<div ng-repeat="acao in capitulo.acao">
 								<button type="button" class="close" ng-click="delLink(acao)"><span class="glyphicon glyphicon-trash"></span></button>
-								<label class="col-sm-12">Numero Capitulo</label>
+								<label class="col-sm-12">Numero Capitulo:</label>
 				            	<input type="number" name="numCapitulo" class="form-control" ng-model="acao.numCapitulo" required>
-				            	<label class="col-sm-12">Ação</label>
-				            	<input name="text" class="form-control" ng-model="acao.text" required>
+				            	<label class="col-sm-3">Escolha:</label>
+				            	<input name="text" class="form-control" ng-model="acao.text" required>				            	
 							</div>
 				        </div>
 				        <div class="modal-footer">
-					        <button class="btn btn-default col-sm-3" ng-click="newLink(capitulo)">Nova Ação</button>
+					        <button class="btn btn-default col-sm-3" ng-model="acao" ng-click="newLink(capitulo)">Nova Ação</button>
 					        <button class="btn btn-default" ng-click="close()">Voltar</button >
 				        </div>
 				      </div>
+			</form>
+			<form novalidate name="formulario" class="row" ng-if="tipo == 'dados'">	
+    			<div class="modal-content">
+				        <div class="modal-header">
+				          <h4 class="modal-title">Ações do Capítulo de {{tipo}}</h4>
+				          <p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+				          <p ng-show="mensagemErro.length" class="alert alert-danger">{{mensagemErro}}</p>
+				        </div>
+				        <div class="modal-body">
+							<div ng-repeat="acao in capitulo.acao">
+								<button type="button" class="close" ng-click="delLink(acao)"><span class="glyphicon glyphicon-trash"></span></button>
+								<label class="col-sm-12">Numero Capitulo:</label>
+				            	<input type="number" name="numCapitulo" class="form-control" ng-model="acao.numCapitulo" required>
+				            	<label class="col-sm-12">Resultado:</label>
+				            	<input name="text" class="form-control" ng-model="acao.text" required>
+				            	<label class="col-sm-12">Faixa entre:</label>
+  									<input type="number" maxlength="2" class="form-control col-sm-3" ng-model="acao.valor1" style="width: 5em;">
+  									<label class="col-sm-1">E</label>
+  									<input type="number" maxlength="2" class="form-control col-sm-3" ng-model="acao.valor2" style="width: 5em;">
+				            	<br></br><br></br>
+				            </div>
+				        </div>
+				        <div class="modal-footer">
+					        <button class="btn btn-default col-sm-3" ng-model="acao" ng-click="newLink(capitulo)">Nova Ação</button>
+					        <button class="btn btn-default" ng-click="validarDados(capitulo)">Validar</button >
+					        <button class="btn btn-default" ng-click="close()">Voltar</button >
+				        </div>
+				</div>
 			</form>
   			</script>
   			<script type="text/ng-template" id="myModalCap.html">

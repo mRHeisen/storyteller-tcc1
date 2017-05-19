@@ -58,6 +58,7 @@ api.buscaPorId = function(req, res){
 	model
 		.findById(req.params.id)
 		.then(function(historia){
+			console.log(historia);
 			//Se historia nao existis executa if e termina o fluxo e vai para função de error
 			if(!historia) throw Error('Historia não encontrada');
 			res.json(historia);
