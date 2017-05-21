@@ -37,6 +37,13 @@ angular.module('storyteller')
 			var x = Math.floor((Math.random() * 21));
 			return x;
 		};
+
+		$scope.capituloLinear = function(num) {
+			console.log($scope.historia);
+				$scope.capitulo = $scope.historia.capitulos[num];
+				console.log("Tipo do capitulo"+$scope.capitulo.tipo);
+		};
+
 		$scope.capituloEscolha = function(num) {
 			console.log($scope.historia);
 				$scope.capitulo = $scope.historia.capitulos[num];

@@ -18,10 +18,11 @@
 	<div class="panel-heading">
 		<label class="col-sm-12 col-xs-12">
 			<h2>Capítulo: {{$index}}</h2>
-			<select ng-init="index = $index" name="tipo" ng-change="tipoDoCap(capitulo)" ng-model="capitulo.tipo" class="form-control">
+			<select ng-init="index = $index" name="tipo" ng-change="tipoDoCap(capitulo, index)" ng-model="capitulo.tipo" class="form-control">
 				<option value="">Tipo?</option>
-				<option value="escolha">Escolhas</option>
-				<option value="dados">Dados</option>
+				<option ng-if="index != '0'" value="escolha">Escolhas</option>
+				<option ng-if="index != '0'" value="dados">Dados</option>
+				<option value="linear">Linear</option>
 				<option ng-if="index != '0'" value="final">Final</option>
 			</select>
 		</label>				
@@ -32,7 +33,7 @@
   				<span class="glyphicon glyphicon-list-alt"></span>
 			</button>
 			<br></br>
-			<button type="button" class="btn btn-default btn-lg btn-block col-sm-12 col-xs-4" ng-disabled="capitulo.tipo == undefined || capitulo.tipo == 'final' || capitulo.tipo == ''" ng-click="open(capitulo)">
+			<button type="button" class="btn btn-default btn-lg btn-block col-sm-12 col-xs-4" ng-disabled="capitulo.tipo == undefined || capitulo.tipo == 'final' || capitulo.tipo == '' || capitulo.tipo == 'linear'" ng-click="open(capitulo)">
 				Ações
   				<span class="glyphicon glyphicon-list-alt"></span>
 			</button>

@@ -6,6 +6,7 @@ angular.module('storyteller')
     $scope.mensagemErro = '';
     $scope.escolha = 'Escolha';
     $scope.dados = 'Dados';
+    $scope.linear = 'Linear';
     $scope.final = 'Final';
     
 		if($routeParams.historiaId) {
@@ -21,7 +22,7 @@ angular.module('storyteller')
 			});
 		}
 		$scope.submeter = function() {
-      console.log($scope.historia);
+      //console.log($scope.historia);
 			var result = checkHistoria($scope.historia)
 			if ($scope.formulario.$valid && result.situacao === true) {
 				cadastroDeHistorias.cadastrar($scope.historia)
@@ -39,10 +40,16 @@ angular.module('storyteller')
 			};
 		};
 		// Adiciona capitulo em branco
-      $scope.tipoDoCap = function(capitulo) {  
+      $scope.tipoDoCap = function(capitulo, index) {  
       if(capitulo.tipo == "final"){
         capitulo.acao.splice(0);
         console.log(capitulo.acao);
+      };
+      if(capitulo.tipo == "linear"){
+        index = index+1;
+        acL = {numCapitulo: index, text: "Proximo Capítulo"};
+        capitulo.acao.push(acL);
+        console.log(capitulo);
       };
       };
    		$scope.newCap = function() {
@@ -110,7 +117,6 @@ angular.module('storyteller')
         };
         if(Capituloliberado.situacao === true){
           for(var i=0; i < historia.capitulos.length; i++){
-            console.log("Texto do cap "+i+" : "+historia.capitulos[i].texto);
             if(historia.capitulos[i].texto == null){
               Capituloliberado.situacao = false;
               Capituloliberado.mensagem = "O capitulo "+i+" não contem texto.";
@@ -134,15 +140,15 @@ angular.module('storyteller')
     					
 					};			
 				};		
-			};
-			var aux
+			 };
+			  var aux
     		var numero = 0;
     		var fila = new Array();
     		var retirados = new Array();
     		var repetidos = new Array();
     		fila[fila.length] = numero;
     		do{ 	
-    			console.log("Fila: "+fila); 		
+    			//console.log("Fila: "+fila); 		
     			if(lista[numero].capitulo.filhos.length){
     				for(var k=0; k < lista[numero].capitulo.filhos.length; k++){
     				if(repetidos.indexOf(lista[numero].capitulo.filhos[k]) < 0 && fila.indexOf(lista[numero].capitulo.filhos[k]) < 0){
@@ -185,7 +191,7 @@ angular.module('storyteller')
     	checkRepetidos = function(repetidos, lista){
     		var loop = new Array();
     		var saida = false;
-    		console.log("Repetidos: "+repetidos);
+    		//console.log("Repetidos: "+repetidos);
     		numero = repetidos[0];
     		if(repetidos.length){
     			console.log("Tem repetidos");
@@ -206,7 +212,7 @@ angular.module('storyteller')
     			};  			
     		};
     	}else{
-    		console.log("nao tem repetidos");
+    		//console.log("nao tem repetidos");
     		saida = true
     	};
 			return saida;
@@ -215,28 +221,29 @@ angular.module('storyteller')
     		var arrayAcao = [];
     		for(var i=0; i < historia.capitulos.length; i++){
     			for(var k=0; k < historia.capitulos[i].acao.length; k++){
-					var indexCap = historia.capitulos[i].acao[k].numCapitulo;
-					arrayAcao.push(indexCap);
-					if(!historia.capitulos[indexCap]){
-						Acaoliberada.mensagem = "No capitulo: "+i+" A ação: "+historia.capitulos[i].acao[k].text+", leva para um capitulo inexistente";
-						Acaoliberada.situacao = false;
-						break;
-					}else if(i === indexCap){
-						Acaoliberada.mensagem = "No capitulo: "+i+" A ação: "+historia.capitulos[i].acao[k].text+", leva para seu capitulo de origem";
-						Acaoliberada.situacao = false;
-						break;				
-					};
+					  var indexCap = historia.capitulos[i].acao[k].numCapitulo;
+					  arrayAcao.push(indexCap);
+					     if(!historia.capitulos[indexCap]){
+						    Acaoliberada.mensagem = "No capitulo: "+i+" A ação: "+historia.capitulos[i].acao[k].text+", leva para um capitulo inexistente";
+						    Acaoliberada.situacao = false;
+						    break;
+					     }else if(i === indexCap){
+						    Acaoliberada.mensagem = "No capitulo: "+i+" A ação: "+historia.capitulos[i].acao[k].text+", leva para seu capitulo de origem";
+						    Acaoliberada.situacao = false;
+						    break;				
+					   };
 					
-				};
-			};
-			for(var i=0; i < historia.capitulos.length; i++){
-				if(i > 0 && arrayAcao.indexOf(i) < 0){
-					Acaoliberada.mensagem = "Não existe nenhuma ação que leve para o capitulo: "+i;
-					Acaoliberada.situacao = false;	
-					break;					
-				};
-			};
-			return Acaoliberada
+				  };
+			  };
+
+			   for(var i=0; i < historia.capitulos.length; i++){
+				    if(i > 0 && arrayAcao.indexOf(i) < 0){
+					   Acaoliberada.mensagem = "Não existe nenhuma ação que leve para o capitulo: "+i;
+					   Acaoliberada.situacao = false;	
+					   break;					
+				    };
+			   };
+			   return Acaoliberada
     	};
 
     	checkHistoria = function(historia){
@@ -259,7 +266,7 @@ angular.module('storyteller')
 		Acaoliberada = checkAcaos(historia, Acaoliberada);
 		Capituloliberado = checkCapitulos(historia, Capituloliberado);
 		if(Acaoliberada.situacao === true && Capituloliberado.situacao === true){
-		console.log("Check Looop");
+		//console.log("Check Looop");
 		checkLoop(historia, loopLiberado);
 		};
 		if(Acaoliberada.situacao === true && Capituloliberado.situacao === true && loopLiberado.situacao === true){

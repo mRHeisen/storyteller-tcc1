@@ -13,6 +13,7 @@
 		    			<p ckeditor="editorOptions" ng-model="capitulo.texto"></p>
 						<div ng-repeat="acao in capitulo.acao">
 						    <button ng-if="capitulo.tipo == 'escolha'" class="col-xs-12 col-sm-12 col-md-12" ng-click="capituloEscolha(acao.numCapitulo)">{{acao.text}}</button>
+						    <button ng-if="capitulo.tipo == 'linear'" class="col-xs-12 col-sm-12 col-md-12" ng-click="capituloLinear(acao.numCapitulo)">{{acao.text}}</button>
 						</div> 
 						    <div ng-if="capitulo.tipo == 'dados'" class="panel painel-cap col-xs-12 col-sm-12 col-md-12" style="background-color:#a6a6a6;">
 						    <h3>Resultados possiveis:</h3>
