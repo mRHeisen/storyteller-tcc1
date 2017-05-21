@@ -85,11 +85,6 @@ angular.module('storyteller')
          		}
         	});
     	};
-      $scope.validarDados = function (cap) {
-        var total = (cap.acao.valor1)+(cap.acao.valor2);
-        console.log(total);
-
-      };
     	checkCapitulos = function(historia, Capituloliberado){
         for(var i=0; i < historia.capitulos.length; i++){
           if(historia.capitulos[i].tipo == ""){

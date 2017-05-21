@@ -4,6 +4,7 @@ angular.module('storyteller')
       $scope.tipo = capitulo.tipo;
       $scope.mensagemErro = '';
       $scope.mensagem = '';
+      $scope.numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
       $scope.editorOptions = {
       language: 'pt-br',
       'skin': 'moono',
@@ -34,6 +35,9 @@ angular.module('storyteller')
    		capitulo.acao.push(ac);
    		};
 
+      $scope.numbers = function(valor) {  
+        console.log(valor);
+      };
    		//Remove ultimo link
    	$scope.delLink = function(acao) {
    	  var indiceAcao = $scope.capitulo.acao.indexOf(acao);
@@ -42,25 +46,6 @@ angular.module('storyteller')
    		};
    	};
 
-      $scope.validarDados = function (capitulo) {
-      var total = 0;
-      for(var i=0; i < capitulo.acao.length; i++){
-      var totalAC = capitulo.acao[i].valor1+capitulo.acao[i].valor2;
-      console.log("Acao "+i+" tem: "+totalAC);
-      total = (totalAC)+(total);
-      console.log("TOTAL: "+total);
-      };
-      if(total > 99){
-         $scope.mensagemErro = 'Passou de 99';
-         $scope.mensagem = '';
-      }else if(total < 99){
-         $scope.mensagemErro = 'Não atingiu os 99';
-         $scope.mensagem = '';
-      }else if(total == 99){
-         $scope.mensagem = 'Dados Corretos';
-         $scope.mensagemErro = '';
-      };
-      };
       $scope.close = function(){
          $rootScope.modalInstance.close();
          };

@@ -1,6 +1,7 @@
 angular.module('storyteller')
 	.controller('HistoriaJogarController', function($scope, recursoHistorias, $routeParams, $location, cadastroDeHistorias) {
 		$scope.historia = {};
+		$scope.capitulo = {};
 		$scope.editorOptions = {
       	language: 'pt-br',
       	'skin': 'moono',
@@ -21,7 +22,8 @@ angular.module('storyteller')
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
 				if(historia.disponivel === true){
 					$scope.historia = historia;
-					$scope.historia.capitulos = historia.capitulos[0];
+					$scope.capitulo = historia.capitulos[0];
+					
 				}else{
 					$location.path('/erro');
 				};
@@ -31,14 +33,34 @@ angular.module('storyteller')
 			});
 		};
 
-		$scope.capitulo = function(num) {
-		recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
-				$scope.historia.capitulos = historia.capitulos[num];
-
-			}, function(erro) {
-				console.log(erro);
-				$scope.mensagem = 'Não foi possível obter historia'
-			});
+		randomMeth = function(){
+			var x = Math.floor((Math.random() * 21));
+			return x;
+		};
+		$scope.capituloEscolha = function(num) {
+			console.log($scope.historia);
+				$scope.capitulo = $scope.historia.capitulos[num];
+				console.log("Tipo do capitulo"+$scope.capitulo.tipo);
+		};
+		$scope.capituloDado = function(capitulo) {
+			var valorDado = randomMeth();
+			//var check = confirm("Você tirou: "+valorDado);
+			alert("Você tirou: "+valorDado);
+			console.log(valorDado);
+			//if(check === true){
+			var byvalor = capitulo.acao.slice(0);
+				byvalor.sort(function(a,b) {
+    			return a.valor - b.valor;
+				});
+				console.log('Valor:');
+				console.log(byvalor);;
+			for(var i=0; i < byvalor.length; i++){
+				if(valorDado <= byvalor[i].valor){
+				$scope.capitulo = $scope.historia.capitulos[byvalor[i].numCapitulo];
+				break;
+				};
+			};
+				//};
 		};
 
 	});

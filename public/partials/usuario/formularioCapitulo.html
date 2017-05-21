@@ -18,7 +18,7 @@
 	<div class="panel-heading">
 		<label class="col-sm-12 col-xs-12">
 			<h2>Capítulo: {{$index}}</h2>
-			<select name="tipo" ng-click="tipoDoCap(capitulo)" ng-model="capitulo.tipo" class="form-control">
+			<select name="tipo" ng-change="tipoDoCap(capitulo)" ng-model="capitulo.tipo" class="form-control">
 				<option value="">Tipo?</option>
 				<option value="escolha">Escolhas</option>
 				<option value="dados">Dados</option>
@@ -75,16 +75,13 @@
 				            	<input type="number" name="numCapitulo" class="form-control" ng-model="acao.numCapitulo" required>
 				            	<label class="col-sm-12">Resultado:</label>
 				            	<input name="text" class="form-control" ng-model="acao.text" required>
-				            	<label class="col-sm-12">Faixa entre:</label>
-  									<input type="number" maxlength="2" class="form-control col-sm-3" ng-model="acao.valor1" style="width: 5em;">
-  									<label class="col-sm-1">E</label>
-  									<input type="number" maxlength="2" class="form-control col-sm-3" ng-model="acao.valor2" style="width: 5em;">
-				            	<br></br><br></br>
+				            	<label class="col-sm-3">Valor:</label>
+				            	<select name="numero" ng-model="acao.valor" ng-change="numbers(acao.valor)" ng-options="numero for numero in numeros">
+				            	</select>
 				            </div>
 				        </div>
 				        <div class="modal-footer">
 					        <button class="btn btn-default col-sm-3" ng-model="acao" ng-click="newLink(capitulo)">Nova Ação</button>
-					        <button class="btn btn-default" ng-click="validarDados(capitulo)">Validar</button >
 					        <button class="btn btn-default" ng-click="close()">Voltar</button >
 				        </div>
 				</div>

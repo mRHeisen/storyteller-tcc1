@@ -44,8 +44,7 @@ var schema = mongoose.Schema(
         {
         	numCapitulo : Number,
         	text : String,
-        	valor1 : Number,
-        	valor2 : Number
+        	valor : Number
         }
         ]
     }

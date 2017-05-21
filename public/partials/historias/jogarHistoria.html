@@ -10,10 +10,20 @@
 <div align="center">
     <div class="col-centered panel painel-cap col-xs-12 col-sm-12 col-md-6" style="background-color:#e6e6e6;">
 			<div class="panel-heading" align="left">
-		    			<p ckeditor="editorOptions" ng-model="historia.capitulos.texto"></p>
-						<div ng-repeat="acao in historia.capitulos.acao">
-						    <button class="col-xs-12 col-sm-12 col-md-12" ng-click="capitulo(acao.numCapitulo)">{{acao.text}}</button>
-					    </div>
+		    			<p ckeditor="editorOptions" ng-model="capitulo.texto"></p>
+						<div ng-repeat="acao in capitulo.acao">
+						    <button ng-if="capitulo.tipo == 'escolha'" class="col-xs-12 col-sm-12 col-md-12" ng-click="capituloEscolha(acao.numCapitulo)">{{acao.text}}</button>
+						</div> 
+						    <div ng-if="capitulo.tipo == 'dados'" class="panel painel-cap col-xs-12 col-sm-12 col-md-12" style="background-color:#a6a6a6;">
+						    <h3>Resultados possiveis:</h3>
+						    <ul>
+						    <li ng-repeat="acao in capitulo.acao">{{acao.text}} se o valor for menor que: {{acao.valor}}</li>
+							</ul>
+						    </div>  
+						    <button ng-if="capitulo.tipo == 'dados'" class="panel painel-cap" style="background-color:#a6a6a6;" ng-click="capituloDado(capitulo)"><h2>Jogar D20</h2></button>
+						</div>  	    
+						    <p ng-if="capitulo.tipo == 'final'">CAPITULO FINAL</p>
+
 			</div>
 
     </div>
