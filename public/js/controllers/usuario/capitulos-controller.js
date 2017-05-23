@@ -217,6 +217,7 @@ angular.module('storyteller')
     	};
 			return saida;
     	};
+
     	checkAcaos = function(historia, Acaoliberada){
     		var arrayAcao = [];
     		for(var i=0; i < historia.capitulos.length; i++){
@@ -235,7 +236,6 @@ angular.module('storyteller')
 					
 				  };
 			  };
-
 			   for(var i=0; i < historia.capitulos.length; i++){
 				    if(i > 0 && arrayAcao.indexOf(i) < 0){
 					   Acaoliberada.mensagem = "Não existe nenhuma ação que leve para o capitulo: "+i;

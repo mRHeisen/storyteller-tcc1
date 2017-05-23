@@ -10,6 +10,14 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 		.error(function(erro) {
 			console.log(erro);
 		});
+
+		$http.get('/v1/usuario',{params:{login: $window.localStorage.login}})
+		.success(function(usuario) {
+		console.log(usuario);
+		})
+		.error(function(erro) {
+			console.log(erro);
+		});
 	
 	enviaHistoria = function(historia){
 		if(historia.disponivel === true){
@@ -26,6 +34,11 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 	}
 	$scope.disp = function(historia) {
 		historia.disponivel = !historia.disponivel;
+		console.log($scope.historias);
+		console.log($scope.historias.genero)
+		if($scope.historias.genero.length > 2){
+			console.log($scope.historias.genero);
+		};
 		if(historia.capitulos.length){
 			enviaHistoria(historia);
 		}else{

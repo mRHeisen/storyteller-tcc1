@@ -1,5 +1,5 @@
 angular.module('storyteller')
-	.controller('AvaliaHistoriaController', function($scope, recursoHistorias, $routeParams, $window, $location, cadastroDeHistorias) {
+	.controller('AvaliaHistoriaController', function($scope, recursoHistorias, $routeParams, $window, $location, cadastroDeHistorias, recursoUsuario, cadastroDeUsuario, recursoUsuarioInsignia) {
 		$scope.historia = {};
 		$scope.mensagem = '';
 
@@ -58,6 +58,43 @@ angular.module('storyteller')
 			}
 			return total;
 		};
+		mandaInsignia = function(autor, pontuacao){
+			if(pontuacao >= 100){
+				console.log("Atuor: "+autor+" recebeu insignia de "+pontuacao+" pontos")
+			}else if(pontuacao >= 300){
+				console.log("Atuor: "+autor+" recebeu insignia de "+pontuacao+" pontos")
+			}else if(pontuacao >= 500){
+				console.log("Atuor: "+autor+" recebeu insignia de "+pontuacao+" pontos")
+			}else if(pontuacao >= 1000){
+				console.log("Atuor: "+autor+" recebeu insignia de "+pontuacao+" pontos")
+			};
+
+			recursoUsuario.query({login: autor}, function(usuario){
+			recursoUsuarioInsignia.get({usuarioId: usuario[0]._id}, function(user) {
+			console.log(user.insignia);
+			if(pontuacao >= 100 ){
+				user.insignia.push("Insignia 100 Pontos");
+			}else if(pontuacao >= 300){
+				user.insignia.push("Insignia 300 Pontos");
+			}else if(pontuacao >= 500){
+				user.insignia.push("Insignia 500 Pontos");
+			}else if(pontuacao >= 1000){
+				user.insignia.push("Insignia 1000 Pontos");
+			};
+			cadastroDeUsuario.cadastrar(user)
+				.then(function(dados) {
+				})
+				.catch(function(erro) {
+				});
+			}, function(erro) {
+				console.log(erro);
+			});
+			},function(erro) {
+			console.log(erro);
+			});
+
+			//console.log(autor);
+		};
 
 		enviarAvaliacao = function(pontuacao, nota){
 			for(var i=0; i < $scope.historia.votos.length; i++){
@@ -66,6 +103,9 @@ angular.module('storyteller')
 					pontuacaoFinal = pontuacao - regraNota($scope.historia.votos[i].nota) + regraNota(nota); 
 					$scope.historia.votos[i] = {usuario : login, nota : nota};
 					cadastroDeHistorias.atualizarPontuacao($scope.historia._id, pontuacaoFinal, $scope.historia.votos);
+					if(pontuacaoFinal >= 100){
+						mandaInsignia($scope.historia.autor, pontuacaoFinal);
+					};
 					$scope.historia.pontuacao = pontuacaoFinal;
 					$scope.mensagem = 'Voto atualizado!';	
 					break;

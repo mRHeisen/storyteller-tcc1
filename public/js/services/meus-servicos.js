@@ -11,7 +11,6 @@ angular.module('meusServicos', ['ngResource'])
 		});
 	})
 	.factory('recursoUsuario', function($resource) {
-
 		return $resource('/v1/usuario/:usuarioId', null, {
 			'update' : { 
 				method: 'PUT'
@@ -19,6 +18,16 @@ angular.module('meusServicos', ['ngResource'])
 			'patch' : { 
 				method: 'PATCH'
 			}
+		});
+	})
+	.factory('recursoUsuarioInsignia', function($resource) {
+		return $resource('/v1/insignias/usuario/:usuarioId', null, {
+			'get': {method:'GET'}
+		});
+	})
+	.factory('recursoInsignia', function($resource) {
+		return $resource('/v1/minhas/insignia', null, {
+			'get': {method:'GET'}
 		});
 	})
 	.factory("cadastroDeUsuario", function(recursoUsuario, $q) {

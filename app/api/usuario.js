@@ -52,8 +52,6 @@ api.buscaPorId = function(req, res){
 			//Manda o status 404 na requisição e o erro em json
 			res.status(404).json(error);
 		});
-
-
 };
 //Remove usuario pelo id
 api.removePorId = function(req, res){
@@ -105,5 +103,20 @@ api.atualiza = function(req, res){
 		});
 
 };
-
+api.minhasInsignias = function(req, res){
+	//Usa funçao do mongoose(findById) para procura pelo id que é passado em req.params.id pega o id
+	model
+		.findById(req.params.id, req.body).select({ insignia: 1})
+		.then(function(usuario){
+			//Se usuario nao existis executa if e termina o fluxo e vai para função de error
+			if(!usuario) throw Error('usuario não encontrada');
+			res.json(usuario);
+		}, function(error){
+			//Mostra o erro no console
+			console.log(error);
+			//Manda o status 404 na requisição e o erro em json
+			res.status(404).json(error);
+		});
+};
 module.exports = api;
+

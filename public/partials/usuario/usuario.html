@@ -32,8 +32,11 @@
 		<div>
 			<h2>Minhas Insígnias : </h2>
 			<p>
-				{------}= {------} = {------} = {------}
+				<div class="row">
+    			<meu-painel class="col-md-3 painel-animado" ng-repeat="insignia in insignias" titulo="{{insignia.nome}}">
+    			</meu-painel>
+				</div>
 			</p>
 		</div>
 </div>
-</div>	
+</div>

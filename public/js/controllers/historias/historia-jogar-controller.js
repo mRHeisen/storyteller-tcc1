@@ -21,6 +21,7 @@ angular.module('storyteller')
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
 				if(historia.disponivel === true){
+					console.log(historia.titulo);
 					$scope.historia = historia;
 					$scope.capitulo = historia.capitulos[0];
 					

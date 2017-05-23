@@ -9,5 +9,8 @@ module.exports = function(app){
       .get(api.buscaPorId) //Buscar usuario pelo id
       .delete(api.removePorId) //Remove pelo id da usuario
       .put(api.atualiza) //Atuliza usuario pelo id
+
+    app.route('/v1/insignias/usuario/:id')
+      .get(api.minhasInsignias)//Buscar recurso com get / espera get e uma funcção
      
 };

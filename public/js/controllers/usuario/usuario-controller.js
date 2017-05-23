@@ -1,14 +1,25 @@
 angular.module('storyteller')
-	.controller('UsuarioController', function($scope, $window, $location, $routeParams, $rootScope, recursoUsuario, cadastroDeUsuario) {
+	.controller('UsuarioController', function($scope, $window, $location, $routeParams, $rootScope, recursoUsuario, recursoInsignia, cadastroDeUsuario) {
 
 		$scope.mensagem = '';
 		$scope.usuario = {};
+		$scope.insignias = [];
 
 		console.log($routeParams.usuarioId);
 		if($routeParams.usuarioId) {
 			recursoUsuario.get({usuarioId: $routeParams.usuarioId}, function(usuario) {
 				if(usuario.login == $window.localStorage.login){
 					$scope.usuario = usuario;
+					for (var i = 0; i < usuario.insignia.length; i++) {
+						recursoInsignia.query({nome: usuario.insignia[i]}, function(insignia){
+							console.log(insignia[0]);
+							$scope.insignias.push(insignia[0]);
+							}, function(erro) {
+							console.log(erro);
+							$scope.mensagem = 'Não foi possível obter a insignias'
+							$location.path('/erro');
+							});
+					};
 				}else{
 				$location.path('/erro');
 			};
@@ -33,4 +44,4 @@ angular.module('storyteller')
 			};
 		};
 
-});		
+});

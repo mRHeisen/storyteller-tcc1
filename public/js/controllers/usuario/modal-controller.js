@@ -35,7 +35,7 @@ angular.module('storyteller')
    		capitulo.acao.push(ac);
    		};
 
-      $scope.numbers = function(valor) {  
+      $scope.numbers = function(valor) {
         console.log(valor);
       };
    		//Remove ultimo link

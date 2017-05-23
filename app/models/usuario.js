@@ -17,7 +17,12 @@ var schema = mongoose.Schema(
 	senha : {
 		type: String,
 		require: true
-	}
+	},
+	insignia : [
+		{
+		type: String
+		}
+	]
 });
 
 mongoose.model('Usuario', schema);
