@@ -59,27 +59,32 @@ angular.module('storyteller')
 			return total;
 		};
 		mandaInsignia = function(autor, pontuacao){
-			if(pontuacao >= 100){
-				console.log("Atuor: "+autor+" recebeu insignia de "+pontuacao+" pontos")
-			}else if(pontuacao >= 300){
-				console.log("Atuor: "+autor+" recebeu insignia de "+pontuacao+" pontos")
-			}else if(pontuacao >= 500){
-				console.log("Atuor: "+autor+" recebeu insignia de "+pontuacao+" pontos")
-			}else if(pontuacao >= 1000){
-				console.log("Atuor: "+autor+" recebeu insignia de "+pontuacao+" pontos")
-			};
-
 			recursoUsuario.query({login: autor}, function(usuario){
 			recursoUsuarioInsignia.get({usuarioId: usuario[0]._id}, function(user) {
-			console.log(user.insignia);
 			if(pontuacao >= 100 ){
-				user.insignia.push("Insignia 100 Pontos");
+				var insgnia = "Insignia 100 Pontos";
+				var index = user.insignia.indexOf(insgnia);
+				if(index < 0){
+					user.insignia.push(insgnia);
+				};
 			}else if(pontuacao >= 300){
-				user.insignia.push("Insignia 300 Pontos");
+				var insgnia = "Insignia 300 Pontos";
+				var index = user.insignia.indexOf(insgnia);
+				if(index < 0){
+					user.insignia.push(insgnia);
+				};
 			}else if(pontuacao >= 500){
-				user.insignia.push("Insignia 500 Pontos");
+				var insgnia = "Insignia 500 Pontos";
+				var index = user.insignia.indexOf(insgnia);
+				if(index < 0){
+					user.insignia.push(insgnia);
+				};
 			}else if(pontuacao >= 1000){
-				user.insignia.push("Insignia 1000 Pontos");
+				var insgnia = "Insignia 1000 Pontos";
+				var index = user.insignia.indexOf(insgnia);
+				if(index < 0){
+					user.insignia.push(insgnia);
+				};
 			};
 			cadastroDeUsuario.cadastrar(user)
 				.then(function(dados) {

@@ -13,7 +13,6 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 
 		$http.get('/v1/usuario',{params:{login: $window.localStorage.login}})
 		.success(function(usuario) {
-		console.log(usuario);
 		})
 		.error(function(erro) {
 			console.log(erro);
@@ -33,20 +32,12 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 			});
 	}
 	$scope.disp = function(historia) {
-		historia.disponivel = !historia.disponivel;
-		console.log($scope.historias);
-		console.log($scope.historias.genero)
-		if($scope.historias.genero.length > 2){
-			console.log($scope.historias.genero);
-		};
 		if(historia.capitulos.length){
 			enviaHistoria(historia);
 		}else{
 			$scope.mensagem = 'Historia '+historia.titulo+' não contem capitulos!';
 		}
 	};
-
-
 
 	$scope.remover = function(historia) {
 		var confirmacao = confirm("Excluir a História: "+historia.titulo);

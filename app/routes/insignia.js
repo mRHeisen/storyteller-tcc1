@@ -10,5 +10,7 @@ module.exports = function(app){
       	.get(api.buscaNome); //Buscar recurso com get / espera get e uma funcção
 
      app.route('/v1/insignia/:id')
-     	.delete(api.removePorId) //Remove pelo id da insignia
+     	.get(api.buscaPorId)
+     	.put(api.atualiza) //Atuliza pelo id
+     	.delete(api.removePorId); //Remove pelo id da insignia
 };

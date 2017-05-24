@@ -18,12 +18,12 @@
 	<div class="panel-heading">
 		<label class="col-sm-12 col-xs-12">
 			<h2>Capítulo: {{$index}}</h2>
-			<select ng-init="index = $index" name="tipo" ng-change="tipoDoCap(capitulo, index)" ng-model="capitulo.tipo" class="form-control">
-				<option value="">Tipo?</option>
-				<option ng-if="index != '0'" value="escolha">Escolhas</option>
-				<option ng-if="index != '0'" value="dados">Dados</option>
-				<option value="linear">Linear</option>
-				<option ng-if="index != '0'" value="final">Final</option>
+			<select ng-init="index = $index" name="tipo" ng-change="tipoDoCap(capitulo, $index)" ng-model="capitulo.tipo" class="form-control">
+				<option ng-init="index = $index" value="">Tipo?</option>
+				<option ng-init="index = $index" ng-if="$index != '0'" value="escolha">Escolhas</option>
+				<option ng-init="index = $index" ng-if="$index != '0'" value="dados">Dados</option>
+				<option ng-init="index = $index" value="linear">Linear</option>
+				<option ng-init="index = $index" ng-if="$index != '0'" value="final">Final</option>
 			</select>
 		</label>				
     	<div>

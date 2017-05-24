@@ -36,7 +36,6 @@ angular.module('meusServicos', ['ngResource'])
 			return $q(function(resolve, reject) {
 
 				if(usuario._id) {
-					console.log("sasa");
 					recursoUsuario.update({usuarioId: usuario._id}, usuario, function() {
 						resolve({
 							mensagem: 'Usuario ' + usuario.login + ' atualizada com sucesso',

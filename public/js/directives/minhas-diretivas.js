@@ -30,6 +30,21 @@ angular.module('minhasDiretivas', [])
         
         return ddo;
     })
+    .directive('minhaInsignia', function() {
+
+        var ddo = {};
+
+        ddo.restrict = "AE";
+
+        ddo.scope = {
+            nome: '@',
+            url: '@'
+        };
+
+        ddo.template = '<img class="img-responsive center-block" ng-src="{{url}}" alt="{{nome}}">';           
+        
+        return ddo;
+    })
     .directive('meuBotaoPerigo', function() {
         var ddo = {};
         ddo.restrict = "E";

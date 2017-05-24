@@ -47,10 +47,11 @@ angular.module('storyteller')
       };
       if(capitulo.tipo == "linear"){
         index = index+1;
+        capitulo.acao.splice(0);
         acL = {numCapitulo: index, text: "Proximo Capítulo"};
         capitulo.acao.push(acL);
-        console.log(capitulo);
       };
+      console.log(capitulo+"index: "+index);
       };
    		$scope.newCap = function() {
    		var indiceDoCap = $scope.historia.capitulos.length

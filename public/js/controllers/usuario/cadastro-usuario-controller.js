@@ -10,7 +10,6 @@ angular.module('storyteller')
         $scope.submeter = function(login) {
 
 			recursoUsuario.query({login: login}, function(usuario){
-				console.log(usuario);
 				if(usuario[0]){
 					$scope.mensagem = 'login ja utilizado.';
 				}else{

@@ -21,7 +21,6 @@ angular.module('storyteller')
 		if($routeParams.historiaId) {
 			recursoHistorias.get({historiaId: $routeParams.historiaId}, function(historia) {
 				if(historia.disponivel === true){
-					console.log(historia.titulo);
 					$scope.historia = historia;
 					$scope.capitulo = historia.capitulos[0];
 					
@@ -40,28 +39,21 @@ angular.module('storyteller')
 		};
 
 		$scope.capituloLinear = function(num) {
-			console.log($scope.historia);
 				$scope.capitulo = $scope.historia.capitulos[num];
-				console.log("Tipo do capitulo"+$scope.capitulo.tipo);
 		};
 
 		$scope.capituloEscolha = function(num) {
-			console.log($scope.historia);
 				$scope.capitulo = $scope.historia.capitulos[num];
-				console.log("Tipo do capitulo"+$scope.capitulo.tipo);
 		};
 		$scope.capituloDado = function(capitulo) {
 			var valorDado = randomMeth();
 			//var check = confirm("Você tirou: "+valorDado);
 			alert("Você tirou: "+valorDado);
-			console.log(valorDado);
 			//if(check === true){
 			var byvalor = capitulo.acao.slice(0);
 				byvalor.sort(function(a,b) {
     			return a.valor - b.valor;
 				});
-				console.log('Valor:');
-				console.log(byvalor);;
 			for(var i=0; i < byvalor.length; i++){
 				if(valorDado <= byvalor[i].valor){
 				$scope.capitulo = $scope.historia.capitulos[byvalor[i].numCapitulo];

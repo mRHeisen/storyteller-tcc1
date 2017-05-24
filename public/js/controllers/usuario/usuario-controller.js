@@ -4,15 +4,13 @@ angular.module('storyteller')
 		$scope.mensagem = '';
 		$scope.usuario = {};
 		$scope.insignias = [];
-
-		console.log($routeParams.usuarioId);
+		
 		if($routeParams.usuarioId) {
 			recursoUsuario.get({usuarioId: $routeParams.usuarioId}, function(usuario) {
 				if(usuario.login == $window.localStorage.login){
 					$scope.usuario = usuario;
 					for (var i = 0; i < usuario.insignia.length; i++) {
 						recursoInsignia.query({nome: usuario.insignia[i]}, function(insignia){
-							console.log(insignia[0]);
 							$scope.insignias.push(insignia[0]);
 							}, function(erro) {
 							console.log(erro);
