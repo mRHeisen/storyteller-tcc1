@@ -32,6 +32,7 @@ angular.module('storyteller').controller('HistoriasController', function($scope,
 			});
 	}
 	$scope.disp = function(historia) {
+		historia.disponivel = !historia.disponivel;
 		if(historia.capitulos.length){
 			enviaHistoria(historia);
 		}else{
