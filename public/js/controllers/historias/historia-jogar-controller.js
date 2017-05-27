@@ -33,8 +33,9 @@ angular.module('storyteller')
 			});
 		};
 
-		randomMeth = function(){
-			var x = Math.floor((Math.random() * 21));
+		randomMeth = function(ultimoValor){
+			console.log(ultimoValor.valor);
+			var x = Math.floor((Math.random() * ultimoValor.valor + 1));
 			return x;
 		};
 
@@ -46,14 +47,15 @@ angular.module('storyteller')
 				$scope.capitulo = $scope.historia.capitulos[num];
 		};
 		$scope.capituloDado = function(capitulo) {
-			var valorDado = randomMeth();
-			//var check = confirm("Você tirou: "+valorDado);
-			alert("Você tirou: "+valorDado);
-			//if(check === true){
 			var byvalor = capitulo.acao.slice(0);
 				byvalor.sort(function(a,b) {
     			return a.valor - b.valor;
 				});
+			var ultimoValor = byvalor[byvalor.length -1]
+			var valorDado = randomMeth(ultimoValor);
+			//var check = confirm("Você tirou: "+valorDado);
+			alert("Você tirou: "+valorDado);
+			//if(check === true){
 			for(var i=0; i < byvalor.length; i++){
 				if(valorDado <= byvalor[i].valor){
 				$scope.capitulo = $scope.historia.capitulos[byvalor[i].numCapitulo];
