@@ -7,7 +7,7 @@ app.set('secret', 'homemavestruz');
 
 app.use(express.static('./public'));
 app.use(bodyParser.json());
-consign({ cwd : 'app'})
+consign({cwd: "app"})
 	.include('models')
 	.then('api')
 	.then('routes/auth.js') // garante que o modulo auth seja carregado antes de todas as rotas

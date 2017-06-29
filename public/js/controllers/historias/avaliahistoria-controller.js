@@ -67,19 +67,22 @@ angular.module('storyteller')
 				if(index < 0){
 					user.insignia.push(insgnia);
 				};
-			}else if(pontuacao >= 300){
+			};
+			if(pontuacao >= 300){
 				var insgnia = "Insignia 300 Pontos";
 				var index = user.insignia.indexOf(insgnia);
 				if(index < 0){
 					user.insignia.push(insgnia);
 				};
-			}else if(pontuacao >= 500){
+			};
+			if(pontuacao >= 500){
 				var insgnia = "Insignia 500 Pontos";
 				var index = user.insignia.indexOf(insgnia);
 				if(index < 0){
 					user.insignia.push(insgnia);
 				};
-			}else if(pontuacao >= 1000){
+			};
+			if(pontuacao >= 1000){
 				var insgnia = "Insignia 1000 Pontos";
 				var index = user.insignia.indexOf(insgnia);
 				if(index < 0){
